@@ -1,0 +1,260 @@
+---
+title: "JTR-Data Documentation"
+author: "Christian 'Becko' Beck"
+date: "13 April 2017"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+In this short script i will explain how i loaded, transformed, cleaned and amended the given JTR-data. The resulting data set the basis for the following analysis. It is also free to use for everybody else for further analysis-ideas. Please just give credit to the source of this data-set.
+
+### Licensing
+
+This data-set is open for everybody. Use it, share it, improve it, do what you want. And if you do, please cite this github repository as it's source.
+
+![CC BY](https://licensebuttons.net/l/by/3.0/88x31.png)
+
+License-Link: https://creativecommons.org/licenses/by/4.0/
+
+## Data Loading
+
+The source is a flat CSV - a snapshot directly drawn from the database - provided by Ace. It comprises detailed torunament informations as well as participant informations within each row.
+
+```{r loading}
+library(readr)
+
+JTR.jtr <- read_csv("jtr_export.csv", col_names = FALSE,
+                    col_types = cols(X2 = col_datetime(format = "%Y-%m-%d %H:%M:%S"), X3 = col_datetime(format = "%Y-%m-%d %H:%M:%S"), X6 = col_character()))
+```
+
+### Cleaning and Transformations
+
+In the source all characters are coded in HTML-symbols. So 'ü' becomes &uuml;. For a clean data-set i prefer the original names over those codings that are only relevant for presentation. So i reverse this coding with the help of the XML-package.
+
+```{r HTML-encoding}
+##################################################################################################
+## SOURCE: http://stackoverflow.com/questions/5060076/convert-html-character-entity-encoding-in-r
+# added NA check
+# load XML package
+library(XML)
+
+# Convenience function to convert html codes
+html2txt <- function(str) {
+  if (is.na(str)) {
+    ''
+  } else {
+    xpathApply(htmlParse(str, asText=TRUE),
+               "//body//text()", 
+               xmlValue)[[1]] 
+  }
+}
+##################################################################################################
+
+library(dplyr, warn.conflicts = FALSE)
+
+# fix char encoding
+JTR.jtr$X6[JTR.jtr$X6 == '-'] <- NA
+JTR.jtr <- JTR.jtr %>% mutate(X1  = sapply(X1 , FUN = html2txt),
+                              X5  = sapply(X5 , FUN = html2txt),
+                              X6  = sapply(X6 , FUN = html2txt),
+                              X7  = sapply(X7 , FUN = html2txt),
+                              X8  = sapply(X8 , FUN = html2txt),
+                              X9  = sapply(X9 , FUN = html2txt),
+                              X11 = sapply(X11, FUN = html2txt),
+                              X12 = sapply(X12, FUN = html2txt),
+                              X13 = sapply(X13, FUN = html2txt))
+# clean PLZ
+JTR.jtr <- JTR.jtr %>% mutate(X6 = substr(X6,1,5))
+```
+
+Postal codes are somewhat messy in the dataset, since they are entered by hand. Sometimes they are appended by the city name or sometimes they are not given, but instead '-' is entered. I fix those occurences in the aboce snippet.
+
+Finally the whole dataset gets transformed into one densly coded (with the help of factors) data frame. Note that the factor-encoding for city and country for torunaments and participants are based on all country and city entries in both cases. This increases ease of matching between both conditions in later analysis.
+
+```{r fix_jtr}
+# code tournament and team together
+Country <- union(JTR.jtr$X5, JTR.jtr$X12)
+City    <- union(JTR.jtr$X7, JTR.jtr$X13)
+JTR.jtr <- JTR.jtr %>% transmute(TournamentName = as.factor(X1),
+                                 TournamentStart = X2,
+                                 TournamentEnd = X3,
+                                 maxParticipants = X4,
+                                 TournamentCountry = factor(X5, levels = Country),
+                                 TournamentPostalCode = as.factor(X6),
+                                 TournamentCity = factor(X7, levels = City),
+                                 TournamentStreet = as.factor(X8),
+                                 TournamentPlace = as.factor(X9),
+                                 Rank = X10,
+                                 TeamName = as.factor(X11),
+                                 TeamCountry = factor(X12, levels = Country),
+                                 TeamCity = factor(X13, levels = City))
+```
+
+## Extract and amend tournament information
+
+Separate tournament informations are useful for several analysis scenarios. So they get extracted from the whole dataset above.
+
+```{r trounament}
+JTR.Tournaments <- JTR.jtr %>% group_by(TournamentName, TournamentStart, TournamentEnd, TournamentCountry, TournamentPostalCode, TournamentCity, TournamentStreet, TournamentPlace, maxParticipants) %>%
+                              summarise(nParticipants = n()) %>% arrange(TournamentStart, TournamentName)
+
+JTR.Tournaments <- JTR.Tournaments %>% ungroup() %>% mutate(TournamentID = row_number())
+```
+
+In the above statements i add a TournamentID as a surrogate key - since i don't have access to the original key from the database. This key will be used later to connect results and teams to a torunament.
+
+In the grouping statement i refrain from only using the name of the tournament as group label (instead i'm somewhat lazy and use all tournament core information). I suspected that while most tournament names are individual due to counting numbers or unique names, that there might be some who aren't. Let's see if i was right.
+
+There are `r nrow(JTR.Tournaments)` with `r length(levels(JTR.Tournaments$TournamentName))` unique names! 
+
+```{r mult_torunaments}
+# tournament name collisions?
+#length(levels(JTR.Tournaments$TournamentName)) #!!!
+
+TournamentsNameMult <- JTR.Tournaments %>% group_by(TournamentName) %>% summarise(n = n()) %>% filter(n > 1) %>% select(TournamentName)
+knitr::kable(JTR.Tournaments %>% filter(TournamentName %in% TournamentsNameMult$TournamentName) %>% arrange(TournamentName))
+```
+
+Next item on the agenda: geo-information! We got country, city and road - a complete adress - for most tournaments. So why not get the geo coordinates for those places. For this task the most convenient solution would be to load ggmap and use the geocode function. geocode has two source: the Data Science Toolkit (DSK, http://www.datasciencetoolkit.org/about) and Google. The DSK has good coverage in the US and UK, but otherwise bad to no coverage - with the main protion of tournaments located in germany DSK is not an option. Google has good coverage of almost every place (at least thats what they are aiming for), but i don't want to rely to much on the behemoth that google is. So the next logical choice is Open Street Map (http://www.openstreetmap.org/) - it' open, like really open, free and has a very involved community of contributers. They don't have data on every place, but their coverage our regions is quit excellent. So a good alternative to Google i would say.
+
+```{r geo_tournament}
+##################################################################################################
+# get geo information
+# BASED ON: https://www.r-bloggers.com/search-and-draw-cities-on-a-map-using-openstreetmap-and-r/
+library(RJSONIO)
+
+geoCodeOSM = function(Street, City, Country) {
+  cleanCityName  <- gsub(' ', '%20', City)
+  if (!is.na(Street)) {
+    cleanStreeName <- gsub(' ', '%20', Street)
+    url <- paste(
+      "http://nominatim.openstreetmap.org/search?"
+      , "limit=9&format=json"
+      , "&street="
+      , cleanStreeName
+      , "&city="
+      , cleanCityName
+      , "&country="
+      , Country
+      , sep="")
+  } else {
+    url <- paste(
+      "http://nominatim.openstreetmap.org/search?"
+      , "limit=9&format=json"
+      , "&city="
+      , cleanCityName
+      , "&country="
+      , Country
+      , sep="")
+  }
+  # return(url);
+  resOSM <- fromJSON(url)
+  if (length(resOSM) > 0) {
+    return(c(resOSM[[1]]$lon, resOSM[[1]]$lat))
+  } else return(rep(NA,2))
+}
+##################################################################################################
+
+geocodeTournaments <- apply(JTR.Tournaments, 1, FUN = function(trow) { geoCodeOSM(trow[7], trow[6], trow[4]) })
+
+JTR.Tournaments$TournamentLongitude <- as.numeric(geocodeTournaments[1, ])
+JTR.Tournaments$TournamentLatitude  <- as.numeric(geocodeTournaments[2, ])
+```
+
+Note: OSM is free but has costs for hosting and bandwith. Do not run the above code, wehn you don't need it. And considere donating to the project ;) (btw. while testing the above code i was careless and quickly execeded their bandwidth limit and was blocked for some time)
+
+Do we have coordinates for every tournament?
+
+No surprise: We don't. There are `r sum(is.na(JTR.Tournaments$TournamentLatitude))` (`r sprintf("%f", 100 * sum(is.na(JTR.Tournaments$TournamentLatitude)) / nrow(JTR.Tournaments))` %) tournaments without geo-information.
+
+```{r geo_tournament_missing}
+# missing geo?
+#sum(is.na(JTR.Tournaments$TournamentLatitude)) / nrow(JTR.Tournaments)
+
+knitr::kable(JTR.Tournaments %>% filter(is.na(TournamentLatitude)))
+```
+
+Well, obviously missing values are caused by faulty entry of adress information. There is virtually no way to fix this, so we just have to live with it - no big problem anyways.
+
+## Extract and amend Team information
+
+The next logical step is to create a similar table for each team.
+
+```{r team}
+##################################################################################################
+
+JTR.Teams <- JTR.jtr %>% group_by(TeamName, TeamCountry, TeamCity) %>% summarise(nParticipations = n())
+JTR.Teams <- JTR.Teams %>% ungroup() %>% mutate(TeamID = row_number())
+```
+
+Again i opt for using the full team information in the JTR source to identify a team - just to be on the safe side. However no team-name collision is present in the current data-set, so just by name would be as accurate. For some use cases (e.g. a team relocating) the chosen approach might even be a problem, but there is no example for such a process in the data.
+
+Note that i again add a surrogate Team ID for later analysis purpose.
+
+And again geocoding is possible.
+
+```{r geo_team}
+geocodeTeams <- apply(JTR.Teams, 1, FUN = function(trow) { geoCodeOSM(Street = NA, trow[3], trow[2]) })
+
+JTR.Teams$TeamLongitude <- as.numeric(geocodeTeams[1, ])
+JTR.Teams$TeamLatitude  <- as.numeric(geocodeTeams[2, ])
+# rm(geocodeTeams)
+```
+
+A Team has additional information of country and city. Not very specific, but still as an approximation good enough. This information might not be as useful or accurate as the geocoding for the tournament location, but it still has some uses.
+
+Do we have coordinates for every team?
+
+No surprise: We don't. There are `r sum(is.na(JTR.Teams$TeamLatitude))` (`r sprintf("%f", 100 * sum(is.na(JTR.Teams$TeamLatitude)) / nrow(JTR.Teams))` %) teams without valid geo-information.
+
+```{r geo_team_missing}
+# missing geo?
+#sum(is.na(JTR.Teams$TeamLatitude)) / nrow(JTR.Teams)
+
+knitr::kable(JTR.Teams %>% filter(is.na(TeamLatitude)))
+```
+
+Well, obviously missing values are caused by faulty entry of adress information and this time this seems to be wanted - some teams are not affiliated with any city, but are a mixed from several cities.
+
+## Extract and amend Results
+
+Lastly i'd like to have a seperate results table, just like you would write into a database. Given the prior created IDs this table can be created without any hassle.
+
+```{r results}
+JTR.jtr <- JTR.jtr %>%  left_join(JTR.Tournaments) %>%
+                        left_join(JTR.Teams)
+JTR.Results <- JTR.jtr %>% transmute(TournamentID, TeamID, Rank)
+```
+
+Just a quick look on the new dataset:
+
+```{r results_property}
+summary(Results)
+
+hist(Results$Rank)
+```
+
+No outliers. Nice! And - as expected - lots of torunaments with a low number of participants and few with very many teams (64 Teams, DM2014). No surprises here.
+
+```{r results_property2}
+knitr::kable(Results %>% group_by(TournamentID) %>% summarise(n = n(), max = max(Rank), ranks = length(unique(Rank))) %>% ungroup() %>% filter(n != max))
+```
+
+There is a small number of torunaments which at a first glance are somewhat problematic. Those tournaments have all less result ranks than participating teams. But those are all due to ties in the result set (sometimes even intended by the tournament organiser). Just keep this in mind when analysing torunament results - either find some logic for those cases or remove those few tournaments.
+
+## Finishing
+
+All four sets - jtr, tournaments, teams and results - can be used for any kind of analysis.
+In the following snippet i store them in as RData and as flat-files, so that anyone can use those data-sets for any analysis purpose.
+
+```{r deploy_dataset}
+devtools::use_data(JTR.jtr, JTR.Tournaments, JTR.Teams, JTR.Results, overwrite = TRUE)
+```
+
