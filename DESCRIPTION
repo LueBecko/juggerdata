@@ -1,0 +1,17 @@
+Package: juggerdata
+Type: Package
+Title: A package containing all the datasets from the juggerdata project for reuseability
+Version: 0.1.0
+Author: Christian Beck
+Maintainer: Christian Beck <luebeckogm at gmail.com>
+Description: While working with on various small datasets on my blog jugger-data (https://juggerdata.blogspot.de/)
+    i got the idea to bundle all this for reusability into one package.
+    This package is intended to be used as a central repository, such that everybody can start doing analysis without much prior work.
+    Data-sets currently maintained by the package:
+    * jtr (data from the JTR platform (http://turniere.jugger.org/); Tournaments, Teams, Results from 2009 till 2016)
+License: CC-BY 4.0 ( https://creativecommons.org/licenses/by/4.0/ )
+Encoding: UTF-8
+LazyData: true
+Suggests: dplyr, readr, XML, RJSONIO, knittr
+URL: https://juggerdata.blogspot.de/
+BugReports: github
