@@ -17,11 +17,7 @@ In this short script i will explain how i loaded, transformed, cleaned and amend
 
 ### Licensing
 
-This data-set is open for everybody. Use it, share it, improve it, do what you want. And if you do, please cite this github repository as it's source.
-
-![CC BY](https://licensebuttons.net/l/by/3.0/88x31.png)
-
-License-Link: https://creativecommons.org/licenses/by/4.0/
+This data-set is open for everybody. Use it, share it, improve it, do what you want. And if you do, please cite this package as it's author.
 
 ## Data Loading
 
@@ -130,7 +126,7 @@ Next item on the agenda: geo-information! We got country, city and road - a comp
 # BASED ON: https://www.r-bloggers.com/search-and-draw-cities-on-a-map-using-openstreetmap-and-r/
 library(RJSONIO)
 
-geoCodeOSM = function(Street, City, Country) {
+geoCodeOSM <- function(Street, City, Country) {
   cleanCityName  <- gsub(' ', '%20', City)
   if (!is.na(Street)) {
     cleanStreeName <- gsub(' ', '%20', Street)
@@ -236,15 +232,15 @@ JTR.Results <- JTR.jtr %>% transmute(TournamentID, TeamID, Rank)
 Just a quick look on the new dataset:
 
 ```{r results_property}
-summary(Results)
+summary(JTR.Results)
 
-hist(Results$Rank)
+hist(JTR.Results$Rank)
 ```
 
 No outliers. Nice! And - as expected - lots of torunaments with a low number of participants and few with very many teams (64 Teams, DM2014). No surprises here.
 
 ```{r results_property2}
-knitr::kable(Results %>% group_by(TournamentID) %>% summarise(n = n(), max = max(Rank), ranks = length(unique(Rank))) %>% ungroup() %>% filter(n != max))
+knitr::kable(JTR.Results %>% group_by(TournamentID) %>% summarise(n = n(), max = max(Rank), ranks = length(unique(Rank))) %>% ungroup() %>% filter(n != max))
 ```
 
 There is a small number of torunaments which at a first glance are somewhat problematic. Those tournaments have all less result ranks than participating teams. But those are all due to ties in the result set (sometimes even intended by the tournament organiser). Just keep this in mind when analysing torunament results - either find some logic for those cases or remove those few tournaments.
@@ -256,5 +252,6 @@ In the following snippet i store them in as RData and as flat-files, so that any
 
 ```{r deploy_dataset}
 devtools::use_data(JTR.jtr, JTR.Tournaments, JTR.Teams, JTR.Results, overwrite = TRUE)
+save(JTR.jtr, JTR.Tournaments, JTR.Teams, JTR.Results, file = "jtr.RData")
 ```
 

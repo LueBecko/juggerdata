@@ -71,7 +71,7 @@ JTR.Tournaments <- JTR.Tournaments %>% ungroup() %>% mutate(TournamentID = row_n
 # BASED ON: https://www.r-bloggers.com/search-and-draw-cities-on-a-map-using-openstreetmap-and-r/
 library(RJSONIO)
 
-geoCodeOSM = function(Street, City, Country) {
+geoCodeOSM <- function(Street, City, Country) {
   cleanCityName  <- gsub(' ', '%20', City)
   if (!is.na(Street)) {
     cleanStreeName <- gsub(' ', '%20', Street)
@@ -120,6 +120,7 @@ JTR.Teams <- JTR.jtr %>% group_by(TeamName, TeamCountry, TeamCity) %>% summarise
 JTR.Teams <- JTR.Teams %>% ungroup() %>% mutate(TeamID = row_number())
 
 geocodeTeams <- apply(JTR.Teams, 1, FUN = function(trow) { geoCodeOSM(Street = NA, trow[3], trow[2]) })
+save(geocodeTournaments,geocodeTeams, file = "geocodes.RData")
 
 JTR.Teams$TeamLongitude <- as.numeric(geocodeTeams[1, ])
 JTR.Teams$TeamLatitude  <- as.numeric(geocodeTeams[2, ])
@@ -139,3 +140,5 @@ JTR.Results <- JTR.jtr %>% transmute(TournamentID, TeamID, Rank)
 ##################################################################################################
 #save(jtr, Tournaments, Results, Teams, file = "JTR.RData")
 devtools::use_data(JTR.jtr, JTR.Tournaments, JTR.Teams, JTR.Results, overwrite = TRUE)
+save(JTR.jtr, JTR.Tournaments, JTR.Teams, JTR.Results, file = "jtr.RData")
+
