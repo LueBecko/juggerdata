@@ -1,7 +1,7 @@
 #' JTR-data
 #'
 #' A data set of jugger tournament participation
-#' and results over a long time preiode (2009-2016).
+#' and results over a long time preiode (2009-2017).
 #'
 #' @format A data frame with 2941 rows and 19 variables:
 #' \describe{
@@ -32,7 +32,7 @@
 
 #' JTR-tournament data
 #'
-#' A data set of jugger tournaments over a long time preiode (2009-2016).
+#' A data set of jugger tournaments over a long time preiode (2009-2017).
 #'
 #' @format A data frame with 217 rows and 13 variables:
 #' \describe{
@@ -56,7 +56,7 @@
 #' JTR-team data
 #'
 #' A data set of jugger teams registered in the JTR
-#' from a long time preiode (2009-2016).
+#' from a long time preiode (2009-2017).
 #'
 #' @format A data frame with 474 rows and 7 variables:
 #' \describe{
@@ -74,7 +74,7 @@
 #' JTR-torunament result data
 #'
 #' A data set of jugger tournament results
-#' over a long time preiode (2009-2016).
+#' over a long time preiode (2009-2017).
 #'
 #' Note: This data set is not very useful  for standalone analysis and should be
 #'       joined with at least one of JTR.Tournaments or JTR.Teams

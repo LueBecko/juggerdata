@@ -9,6 +9,8 @@ Description: Jugger related data sets - as discussed on my blog jugger-data (htt
 License: CC0
 Encoding: UTF-8
 LazyData: true
+Depends: R (>= 2.10)
 Suggests: dplyr, readr, XML, RJSONIO, knitr
 URL: https://juggerdata.blogspot.de/
 BugReports: https://github.com/LueBecko/juggerdata/issues
+RoxygenNote: 6.0.1

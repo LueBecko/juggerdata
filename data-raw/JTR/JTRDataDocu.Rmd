@@ -159,6 +159,7 @@ geoCodeOSM <- function(Street, City, Country) {
 ##################################################################################################
 
 geocodeTournaments <- apply(JTR.Tournaments, 1, FUN = function(trow) { geoCodeOSM(trow[7], trow[6], trow[4]) })
+save(geocodeTournaments, file = "geocodes.RData")
 
 JTR.Tournaments$TournamentLongitude <- as.numeric(geocodeTournaments[1, ])
 JTR.Tournaments$TournamentLatitude  <- as.numeric(geocodeTournaments[2, ])
@@ -198,6 +199,7 @@ And again geocoding is possible.
 
 ```{r geo_team}
 geocodeTeams <- apply(JTR.Teams, 1, FUN = function(trow) { geoCodeOSM(Street = NA, trow[3], trow[2]) })
+save(geocodeTournaments,geocodeTeams, file = "geocodes.RData")
 
 JTR.Teams$TeamLongitude <- as.numeric(geocodeTeams[1, ])
 JTR.Teams$TeamLatitude  <- as.numeric(geocodeTeams[2, ])

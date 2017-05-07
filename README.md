@@ -13,7 +13,7 @@ It would also be very nice if you cite this package and it's author as the sourc
 ## Datasets
 This package contains the following datasets:
 
-* `JTR`: JTR-data from the years 2009 till early 2017 (http://turniere.jugger.org/)
+* `JTR`: JTR-data from the years 2009 till early 2017 (http://turniere.jugger.org/, thanks to Jan 'Ace' Schliep)
     * `JTR.Tournaments`: A comprehensive list of tournaments and their meta-data
     * `JTR.Teams`: A comprehensive list of registered teams and their meta-data
     * `JTR.Results`: A comprehensive list of tournament participation and results
