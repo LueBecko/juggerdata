@@ -1,0 +1,218 @@
+"";"TournamentName";"TournamentStart";"TournamentEnd";"TournamentCountry";"TournamentPostalCode";"TournamentCity";"TournamentStreet";"TournamentPlace";"maxParticipants";"nParticipants";"TournamentID";"TournamentLongitude";"TournamentLatitude"
+"1";"1. NRW Turnier";2009-03-22 11:00:00;2009-03-22 17:00:00;"Deutschland";"59555";"Lippstadt";"Udener Str.";"Jahn-Sportplatz in Lippstadt";0;5;1;8,3337762;51,6721709
+"2";"1. Freundschaftliche Winterspiele";2009-04-04 13:00:00;2009-04-05 16:00:00;"Deutschland";"21339";"LÃ¼neburg";"Am WienebÃ¼tteler Weg 14";"Sportpark Kreideberg";12;11;2;10,385981;53,2595313
+"3";"3. Berliner Juggerpokal";2009-04-25 11:00:00;2009-04-26 16:00:00;"Deutschland";"12049";"Berlin";"Danziger StraÃe";"Volkspark Friedrichshain";0;10;3;13,4446174;52,5294363
+"4";"1. School's Out der OGS";2009-05-03 10:00:00;2009-05-03 17:00:00;"Deutschland";"24589";"Nortorf";"Marienburger StraÃe 47-49";"SportgelÃ¤nde der OGS";4;4;4;9,8450968;54,166312
+"5";"4. Schleswig-Holstein Meisterschaft";2009-05-09 10:00:00;2009-05-10 16:00:00;"Deutschland";"23847";"Rethwisch";"Buchrader Weg 2";"Sportplatz des VfL Rethwisch";0;15;5;10,4401006536605;53,78423965
+"6";"7. Badische Meisterschaft";2009-05-23 11:00:00;2009-05-23 20:00:00;"Deutschland";"79110";"Freiburg";"FalkenbergerstraÃe 21";"Bolzplatz bei Ãkostation";0;8;6;7,8238526;48,0138942
+"7";"2. ThÃ¼ringer Meisterschaft";2009-06-06 10:00:00;2009-06-07 20:00:00;"Deutschland";"07743";"Jena";"An der Oberaue 1";"Jena";0;7;7;11,5836561;50,9180893
+"8";"2. Niedersachsen Meisterschaft";2009-06-12 15:00:00;2009-06-14 16:00:00;"Deutschland";"21339";"LÃ¼neburg";"Ebelingweg 2";"LÃ¼neburg";0;23;8;10,3892677;53,2611468
+"9";"10. Bayerische Meisterschaft";2009-06-20 10:00:00;2009-06-21 00:00:00;"Deutschland";"92726";"Waidhaus";"An der Bahn 2";"SportgelÃ¤nde des TSV Waidhaus";12;8;9;12,4967105;49,6400456
+"10";"2. WestfÃ¤lische Meisterschaft";2009-07-04 10:00:00;2009-07-05 15:00:00;"Deutschland";"59555";"Lippstadt";"Udener Str.";"Jahn-Sportplatz in Lippstadt";0;20;10;8,3337762;51,6721709
+"11";"2. Oldenburger Kreismeisteschaft";2009-07-11 09:00:00;2009-07-11 20:00:00;"Deutschland";"26135";"Oldenburg";"Schlosswall / GartenstraÃe";"Schlossgarten zu Oldenburg";0;9;11;NA;NA
+"12";"2. Auenlandcup";2009-07-11 12:00:00;2009-07-12 15:00:00;"Deutschland";"69120";"Heidelberg";"hd 1";"Heidelberg";16;7;12;8,7195044;49,4061024
+"13";"1. Hessische Meisterschaft";2009-07-18 09:00:00;2009-07-19 23:59:00;"Deutschland";"";"Darmstadt";"Unigel?nde Lichtwiese";"Messfeld bei der Sickergrube";0;7;13;NA;NA
+"14";"15. Hamburger Meisterschaft";2009-08-15 10:00:00;2009-08-16 17:00:00;"Deutschland";"22303";"Hamburg";"SaarlandstraÃe";"Stadtpark / GelÃ¤nde Rugby St. Pauli";26;21;14;10,0316818;53,5957328
+"15";"5. SaarlÃ¤ndische Meisterschaft";2009-08-29 11:00:00;2009-08-30 16:00:00;"Deutschland";"66424";"Homburg";"66424 Homburg-Schwarzenbach";"Sportplatz ""Am Wacken""";16;7;15;NA;NA
+"16";"12. Deutsche Meisterschaft";2009-09-12 11:00:00;2009-09-13 16:00:00;"Deutschland";"1000";"Berlin";"CantianstraÃe 24 / GaudystraÃe";"Ludwig-Jahn-Sportpark";0;36;16;NA;NA
+"17";"5. Moshen im Park";2009-10-11 10:00:00;2009-10-11 18:00:00;"Deutschland";"23843";"Bad Oldesloe";"Kreuzung Kurparkallee / SÃ¼lzberg";"Liegewiese bei den TennisplÃ¤tzen";5;5;17;NA;NA
+"18";"1. SÃ¼ddeutschland Turnier";2009-10-17 13:00:00;2009-10-18 10:00:00;"Deutschland";"86153";"Augsburg";"RemboldstraÃe";"Kulturpark Rotes Tor";0;3;18;10,9055508;48,3605067
+"19";"2. Freundschaftliche Winterspiele";2009-12-05 10:00:00;2009-12-06 16:00:00;"Deutschland";"21339";"LÃ¼neburg";"WienebÃ¼ttlerweg 14";"Sportpark Kreideberg";14;14;19;NA;NA
+"20";"1. LÃ¼neburger Jugendmeisterschaft";2010-03-06 10:00:00;2010-03-06 16:00:00;"Deutschland";"21339";"LÃ¼neburg";"Vor dem Neuen Tore 31";"Hermann-LÃ¶ns-Grundschule";4;3;20;10,3892519;53,2495848
+"21";"2. NRW Turnier";2010-04-03 11:00:00;2010-04-03 18:00:00;"Deutschland";"59555";"Lippstadt";"Udener Str.";"Lippstadt";0;6;21;8,3337762;51,6721709
+"22";"4. Berliner Juggerpokal";2010-04-24 11:00:00;2010-04-25 16:00:00;"Deutschland";"12049";"Berlin";"Danziger StraÃe";"Volkspark Friedrichshain";0;8;22;13,4446174;52,5294363
+"23";"8. Badische Meisterschaft";2010-05-15 10:00:00;2010-05-15 20:00:00;"Deutschland";"79110";"Freiburg";"Falkenbergerstr 21";"Bolzplatz bei Ãkostation";0;4;23;7,8238526;48,0138942
+"24";"6. SaarlÃ¤ndische Meisterschaft";2010-05-29 11:00:00;2010-05-30 16:00:00;"Deutschland";"66424";"Homburg";"BrunnenstraÃe";"Stadtpark (voraussichtlich)";16;8;24;7,3505486;49,327499
+"25";"2. School's Out der OGS";2010-06-12 10:00:00;2010-06-12 17:00:00;"Deutschland";"24589";"Nortorf";"Marienburger StraÃe 47-49";"SportgelÃ¤nde der OGS";0;5;25;9,8450968;54,166312
+"26";"11. Bayerische Meisterschaft";2010-06-12 12:00:00;2010-06-13 12:00:00;"Deutschland";"92726";"Waidhaus";"An der Bahn 2";"SportgelÃ¤nde des TSV Waidhaus";20;5;26;12,4967105;49,6400456
+"27";"1. Ligaturnier zu Oldenburg";2010-06-19 10:00:00;2010-06-20 18:00:00;"Deutschland";"21339";"LÃ¼neburg";"Bessemer Str";"LÃ¼neburg";28;18;27;10,4125944;53,2698993
+"28";"5. Schleswig-Holstein Meisterschaft";2010-07-03 11:00:00;2010-07-03 17:00:00;"Deutschland";"23847";"Rethwisch";"Buchrader Weg 2";"Sportplatz des VfL Rethwisch";8;5;28;10,4401006536605;53,78423965
+"29";"3. WestfÃ¤lische Meisterschaft";2010-07-10 10:00:00;2010-07-11 16:00:00;"Deutschland";"59555";"Lippstadt";"Udener Str.";"Lippstadt";0;16;29;8,3337762;51,6721709
+"30";"2. Hessische Meisterschaft";2010-07-24 09:00:00;2010-07-24 17:00:00;"Deutschland";"";"Darmstadt";"Unigel?nde Lichtwiese";"Messfeld bei der Sickergrube";0;8;30;NA;NA
+"31";"1. SchwÃ¤bische Meisterschaft";2010-08-14 10:00:00;2010-08-15 12:00:00;"Deutschland";"86153";"Augsburg";"RemboldstraÃe";"Kulturpark Rotes Tor";15;2;31;10,9055508;48,3605067
+"32";"1. Turnier zu MÃ¼nster";2010-08-14 10:00:00;2010-08-15 12:00:00;"Deutschland";"48161";"MÃ¼nster";"Feldstiege 45";"Sportplatz des DJK SC Nienberge";12;7;32;7,54896636976026;51,99945965
+"33";"16. Hamburger Meisterschaft";2010-08-21 10:00:00;2010-08-22 18:00:00;"Deutschland";"22303";"Hamburg";"SaarlandstraÃe";"Stadtpark / GelÃ¤nde Rugby St. Pauli";24;20;33;10,0316818;53,5957328
+"34";"3. ThÃ¼ringer Meisterschaft";2010-08-28 10:00:00;2010-08-29 17:00:00;"Deutschland";"07745";"Jena";"Oberaue 1";"Jena";0;6;34;11,5836561;50,9180893
+"35";"13. Deutsche Meisterschaft";2010-09-10 11:00:00;2010-09-12 14:00:00;"Deutschland";"1000";"Berlin";"CantianstraÃe 24 / GaudystraÃe";"Ludwig-Jahn-Sportpark";0;24;35;NA;NA
+"36";"6. Moshen im Park";2010-10-09 10:00:00;2010-10-09 18:00:00;"Deutschland";"23843";"Bad Oldesloe";"Kreuzung Kurparkallee / SÃ¼lzberg";"Liegewiese bei den TennisplÃ¤tzen";5;3;36;NA;NA
+"37";"2. SÃ¼ddeutschland Turnier";2010-10-16 10:00:00;2010-10-16 20:00:00;"Deutschland";"86150";"Augsburg";"GÃ¶ggingerstraÃe 10";"Wittelsbacher Park";0;6;37;10,8871164559423;48,35933445
+"38";"1. Heidelberger Adventsturnier";2010-11-27 10:00:00;2010-11-27 19:00:00;"Deutschland";"69120";"Heidelberg";"UferstraÃe 50";"Neckarwiese";12;5;38;8,68490832815199;49,4128021
+"39";"3. Freundschaftliche Winterspiele";2010-12-11 08:00:00;2010-12-12 16:00:00;"Deutschland";"21335";"LÃ¼neburg";"Uelzener StraÃe 90";"Sportpark Uelzener StraÃe";24;24;39;10,4061228509309;53,23434
+"40";"3. School's Out der OGS";2011-03-26 10:00:00;2011-03-26 17:00:00;"Deutschland";"24589";"Nortorf";"MarienburgerstraÃe 47-49";"Nortorf / Schleswig-Holstein";0;6;40;9,8450968;54,166312
+"41";"3. NRW Turnier";2011-04-09 10:00:00;2011-04-09 19:00:00;"Deutschland";"47229";"Duisburg";"ClarenbachstraÃe 14";"Jugendzentrum ""Die MÃ¼hle""";0;8;41;6,70513008064935;51,392034
+"42";"5. Berliner Juggerpokal";2011-05-07 10:00:00;2011-05-08 18:00:00;"Deutschland";"";"Berlin";"siehe Beschreibung";"Berlin";20;18;42;NA;NA
+"43";"9. Badische Meisterschaft";2011-05-21 11:00:00;2011-05-21 18:00:00;"Deutschland";"78050";"Villingen";"Kalkofenstr.";"Hubenloch";0;11;43;8,4486298;48,0572689
+"44";"7. SaarlÃ¤ndische Meisterschaft";2011-05-28 11:00:00;2011-05-28 20:00:00;"Deutschland";"66424";"Homburg";"BrunnenstraÃe";"Stadtpark Homburg";16;15;44;7,3505486;49,327499
+"45";"4. ThÃ¼ringer Meisterschaft";2011-06-04 10:00:00;2011-06-05 16:00:00;"Deutschland";"07743";"Jena";"An der Oberaue 1";"Jena";0;16;45;11,5836561;50,9180893
+"46";"6. Schleswig-Holstein Meisterschaft";2011-06-25 09:00:00;2011-06-26 16:00:00;"Deutschland";"23847";"Rethwisch";"Buchrader Weg 2";"Sportplatz des VfL Rethwisch";20;18;46;10,4401006536605;53,78423965
+"47";"3. Hessische Meisterschaft";2011-07-02 09:00:00;2011-07-02 18:00:00;"Deutschland";"";"Darmstadt";"UnigelÃ¤nde Lichtwiese";"Messfeld bei der Sickergrube";0;7;47;NA;NA
+"48";"1. Juggerturnier zu Oldenburg in Oldenburg";2011-07-09 10:00:00;2011-07-10 16:00:00;"Deutschland";"26135";"Oldenburg";"Gerhard- Stalling- StraÃe 26";"Sportpark Osternburg";24;14;48;8,2451601;53,1085031
+"49";"17. Hamburger Meisterschaft";2011-08-13 10:00:00;2011-08-14 16:30:00;"Deutschland";"22303";"Hamburg";"SaarlandstraÃe";"Stadtpark / GelÃ¤nde Rugby FC St. Pauli";24;21;49;10,0316818;53,5957328
+"50";"1. Hannoversches Tagesturnier";2011-08-20 10:00:00;2011-08-20 17:00:00;"Deutschland";"30627";"Hannover";"Rotekreuzstrasse 23";"Sportanlagen der IGS Roderbruch";12;6;50;9,81768613945493;52,38726955
+"51";"2. Turnier zu MÃ¼nster";2011-08-20 10:00:00;2011-08-21 13:00:00;"Deutschland";"48165";"MÃ¼nster";"Osttor 85";"Sportplatz TuS Hilturp";16;10;51;7,6688443;51,9068543
+"52";"2. Berliner Meisterschaft";2011-08-27 11:00:00;2011-08-28 16:00:00;"Deutschland";"1000";"Berlin";"CantianstraÃe 24 / GaudystraÃe";"Ludwig-Jahn-Sportpark";0;14;52;NA;NA
+"53";"4. WestfÃ¤lische Meisterschaft";2011-09-03 09:00:00;2011-09-04 16:00:00;"Deutschland";"59555";"Lippstadt";"Udener Str.";"Jahn-Sportplatz in Lippstadt";0;16;53;8,3337762;51,6721709
+"54";"14. Deutsche Meisterschaft";2011-09-17 10:00:00;2011-09-18 18:00:00;"Deutschland";"92726";"Waidhaus";"An der Bahn 2";"SportgelÃ¤nde des TSV Waidhaus";0;32;54;12,4967105;49,6400456
+"55";"7. Moshen im Park";2011-10-02 10:00:00;2011-10-02 18:00:00;"Deutschland";"23843";"Bad Oldesloe";"Kreuzung Kurparkallee / SÃ¼lzberg";"Liegewiese bei den TennisplÃ¤tzen";6;6;55;NA;NA
+"56";"2. Adventsturnier";2011-12-10 10:30:00;2011-12-10 18:00:00;"Deutschland";"79110";"Freiburg";"Falkenbergerstr 21";"Bolzplatz bei Ãkostation";19;13;56;7,8238526;48,0138942
+"57";"4. Freundschaftliche Winterspiele";2012-02-04 09:30:00;2012-02-05 16:00:00;"Deutschland";"12683";"Berlin";"Allee der Kosmonauten 136";"Berlin - Marzahn/Hellersdorf";17;16;57;13,5523410528815;52,53334425
+"58";"GÃ¶ttinger Hallencup 2012";2012-03-03 10:00:00;2012-03-03 20:00:00;"Deutschland";"37073";"GÃ¶ttingen";"Waldweg 28";"Kinderbewegungshaus, Eingang Jugendclub";8;8;58;9,9440092850799;51,5449324
+"59";"1. Hagener Jugger Cup";2012-04-28 09:00:00;2012-04-28 18:00:00;"Deutschland";"58135";"Hagen";"Im Kettelbach 69";"Hagen";12;12;59;7,42811672126889;51,3226435
+"60";"6. Berliner Juggerpokal";2012-04-28 09:00:00;2012-04-29 15:00:00;"Deutschland";"10437";"Berlin";"CantianstraÃe 24";"Friedrich-Ludwig-Jahn-Sportpark";24;23;60;13,4107017;52,5443748
+"61";"10. Badische Meisterschaft";2012-05-12 10:00:00;2012-05-12 18:00:00;"Deutschland";"78050";"Villingen";"Vor Haslen 4";"Jugendtreff Chilly";0;17;61;8,4577546;48,0776487
+"62";"1. Schwarzwald Cup";2012-05-21 19:00:00;2012-05-21 22:00:00;"Deutschland";"78050";"Villingen";"Kalkofenstr.";"Hubenloch";0;4;62;8,4486298;48,0572689
+"63";"5. ThÃ¼ringer Meisterschaft";2012-05-26 10:00:00;2012-05-27 18:00:00;"Deutschland";"07745";"Jena";"Oberaue 1";"Jena";24;22;63;11,5836561;50,9180893
+"64";"12. Bayerische Meisterschaft";2012-06-09 10:00:00;2012-06-10 12:00:00;"Deutschland";"92726";"Waidhaus";"An der Bahn 2";"SportgelÃ¤nde des TSV Waidhaus";18;11;64;12,4967105;49,6400456
+"65";"7. Schleswig-Holstein Meisterschaft";2012-06-16 09:00:00;2012-06-17 16:00:00;"Deutschland";"23847";"Rethwisch";"Buchrader Weg 2";"Sportplatz des VfL Rethwisch";18;15;65;10,4401006536605;53,78423965
+"66";"4. Hessische Meisterschaft";2012-06-16 10:00:00;2012-06-16 20:00:00;"Deutschland";"";"Darmstadt";"Kranichsteiner StraÃe 183";"Sportfeld Ziegelbusch der TG 1875 Darmstadt";12;10;66;8,6723973;49,8899555
+"67";"5. WestfÃ¤lische Meisterschaft";2012-06-23 09:30:00;2012-06-24 17:00:00;"Deutschland";"59555";"Lippstadt";"Udener Str.";"Jahn-Sportplatz in Lippstadt";0;19;67;8,3337762;51,6721709
+"68";"3. Turnier zu MÃ¼nster";2012-06-30 10:00:00;2012-07-01 14:00:00;"Deutschland";"48165";"MÃ¼nster";"Osttor 85";"Sportplatz TuS Hilturp";16;15;68;7,6688443;51,9068543
+"69";"1. Hallesche Stadtbalgerei";2012-07-07 09:00:00;2012-07-08 17:00:00;"Deutschland";"06108";"Halle Saale";"kreuzvorwerk";"halle saale";20;9;69;11,9412713;51,5043603
+"70";"1. WÃ¼rttembergische Meisterschaft";2012-07-14 09:00:00;2012-07-14 18:00:00;"Deutschland";"71409";"Schwaikheim";"SchillerstraÃe 2";"Altes Wiesental";0;10;70;9,3558994;48,8738103
+"71";"18. Hamburger Meisterschaft";2012-08-18 10:00:00;2012-08-19 16:30:00;"Deutschland";"22303";"Hamburg";"SaarlandstraÃe";"Stadtpark / GelÃ¤nde Rugby FC St. Pauli";24;22;71;10,0316818;53,5957328
+"72";"1. Freundschaftliches Jugger Turnier zu Hannover";2012-09-01 10:00:00;2012-09-02 18:00:00;"Deutschland";"30167";"Hannover";"Georgenpark";"Hannover";6;6;72;NA;NA
+"73";"15. Deutsche Meisterschaft";2012-09-08 10:00:00;2012-09-09 16:00:00;"Deutschland";"10965";"Berlin";"Tempelhofer Feld";"Ex-Flughafen Tempelhof, Berlin";64;61;73;13,4027557;52,4729578
+"74";"15. Deutsche Meisterschaft Kinder- und Jugendturnier";2012-09-08 10:00:00;2012-09-09 16:00:00;"Deutschland";"10965";"Berlin";"Tempelhofer Feld";"Ex-Flughafen Tempelhof, Berlin";0;5;74;13,4027557;52,4729578
+"75";"8. Moshen im Park";2012-10-06 10:00:00;2012-10-06 19:00:00;"Deutschland";"23847";"Rethwisch";"Buchrader Weg 2";"Sportplatz des VfL Rethwisch";6;4;75;10,4401006536605;53,78423965
+"76";"1. Freiburger Halloween Juggern";2012-10-27 08:00:00;2012-10-27 22:00:00;"Deutschland";"79110";"Freiburg";"Falkenbergerstr 21";"Bolzplatz bei Ãkostation";0;11;76;7,8238526;48,0138942
+"77";"7. Berliner Juggerpokal";2013-04-20 10:00:00;2013-04-21 16:00:00;"Deutschland";"10965";"Berlin";"Tempelhofer Feld";"Ex-Flughafen Tempelhof, Berlin";28;27;77;13,4027557;52,4729578
+"78";"7. Berliner Juggerpokal -Jugendturnier-";2013-04-20 10:00:00;2013-04-21 16:00:00;"Deutschland";"10965";"Berlin";"Tempelhofer Feld";"Ex-Flughafen Tempelhof, Berlin";6;5;78;13,4027557;52,4729578
+"79";"7. Berliner Juggerpokal -Kinderturnier-";2013-04-20 10:00:00;2013-04-21 16:00:00;"Deutschland";"10965";"Berlin";"Tempelhofer Feld";"Ex-Flughafen Tempelhof, Berlin";6;6;79;13,4027557;52,4729578
+"80";"2. Hagener Jugger Cup";2013-04-27 08:00:00;2013-04-27 18:00:00;"Deutschland";"58093";"Hagen";"Am HÃ¶ing";"Rasensportplatz Am HÃ¶ing";16;16;80;7,4795869;51,367939
+"81";"1. Hanseatic Jugger Cup";2013-04-27 09:00:00;2013-04-28 16:00:00;"Deutschland";"";"LÃ¼beck";"DrÃ¤ger Park";"Stadtbad - Wakenitz";16;13;81;10,7027228;53,8834906
+"82";"1. Cottbuser Jugger Turnier";2013-05-04 09:00:00;2013-05-05 17:00:00;"Deutschland";"03046";"Cottbus";"Walther-Pauer-StraÃe";"Brandenburgische Technische UniversitÃ¤t";12;10;82;14,3252558;51,7688991
+"83";"11. Badische Meisterschaft";2013-05-04 10:00:00;2013-05-04 19:00:00;"Deutschland";"78050";"Villingen";"Kalkofenstr.";"Hubenloch";12;8;83;8,4486298;48,0572689
+"84";"6. ThÃ¼ringer Meisterschaft";2013-05-10 10:00:00;2013-05-11 18:00:00;"Deutschland";"07745";"Jena";"Oberaue 1";"Jena";36;27;84;11,5836561;50,9180893
+"85";"8. SaarlÃ¤ndische Meisterschaft";2013-05-17 18:00:00;2013-05-20 12:00:00;"Deutschland";"";"Homburg";"BrunnenstraÃe";"Stadtpark Homburg";16;11;85;7,3505486;49,327499
+"86";"3. Oldenburger Kreismeisteschaft";2013-05-18 10:00:00;2013-05-19 16:00:00;"Deutschland";"26135";"Oldenburg";"Gerhard- Stalling- StraÃe 26";"Sportpark Osternburg";16;10;86;8,2451601;53,1085031
+"87";"2. Hallesche Stadtbalgerei";2013-05-31 16:00:00;2013-06-02 19:00:00;"Deutschland";"06108";"Halle Saale";"Kreuzvorwerk Brandbergehalle";"Halle Saale";24;15;87;NA;NA
+"88";"5. School's Out der OGS";2013-06-08 10:00:00;2013-06-08 17:00:00;"Deutschland";"24589";"Nortorf";"Marienburger StraÃe 47-49";"Nortorf";12;6;88;9,8450968;54,166312
+"89";"8. Schleswig-Holstein Meisterschaft";2013-06-22 09:00:00;2013-06-23 16:00:00;"Deutschland";"23847";"Rethwisch";"Buchrader Weg 2";"Sportplatz des VfL Rethwisch";18;17;89;10,4401006536605;53,78423965
+"90";"5. Hessische Meisterschaft";2013-07-06 09:00:00;2013-07-06 21:00:00;"Deutschland";"64289";"Darmstadt";"Kranichsteiner StraÃe 183";"Sportplatz Ziegelbusch der TG 1875 Darmstadt";20;18;90;8,6723973;49,8899555
+"91";"2. WÃ¼rttembergische Meisterschaft";2013-07-13 09:00:00;2013-07-13 19:00:00;"Deutschland";"71409";"Schwaikheim";"SchillerstraÃe 2";"Altes Wiesental";0;12;91;9,3558994;48,8738103
+"92";"2. Berlin Masters";2013-07-27 09:00:00;2013-07-28 15:00:00;"Deutschland";"10965";"Berlin";"Columbiadamm 111";"VereinsgelÃ¤nde des Turngemeinde in Berlin 1848 e.V.";20;20;92;13,4079108;52,4826748
+"93";"1. Pommersches Jugendturnier";2013-08-03 10:00:00;2013-08-03 19:00:00;"Deutschland";"17493";"Greifswald";"Yachtweg";"Greifswald-Eldena";8;4;93;13,4516975;54,09319
+"94";"1. Bergische Meisterschaft";2013-08-10 09:00:00;2013-08-11 16:00:00;"Deutschland";"42285";"Wuppertal";"Oberbergische Strasse 91";"Wuppertal";20;16;94;7,17908785;51,2523273
+"95";"19. Hamburger Meisterschaft";2013-08-10 10:00:00;2013-08-11 16:30:00;"Deutschland";"22303";"Hamburg";"SaarlandstraÃe";"Stadtpark KrÃ¤henwiese / Rugby GelÃ¤nde FC St. Pauli";24;24;95;10,0316818;53,5957328
+"96";"13. Bayerische Meisterschaft";2013-08-17 10:00:00;2013-08-17 22:00:00;"Deutschland";"92726";"Waidhaus";"An der Bahn 2";"SportgelÃ¤nde des TSV Waidhaus";16;10;96;12,4967105;49,6400456
+"97";"1. Jugger Turnier an der Uni in Augsburg";2013-09-08 14:00:00;2013-09-08 20:00:00;"Deutschland";"86159";"Augsburg";"UniversitÃ¤tsstraÃe 3";"UniversitÃ¤t Augsburg";8;8;97;10,8955855;48,3308529
+"98";"16. Deutsche Meisterschaft";2013-09-21 12:00:00;2013-09-22 16:00:00;"Deutschland";"10965";"Berlin";"Tempelhofer Feld";"Ex-Flughafen Tempelhof, Berlin";64;60;98;13,4027557;52,4729578
+"99";"9. Moshen im Park";2013-11-09 10:00:00;2013-11-09 18:00:00;"Deutschland";"23847";"Rethwisch";"Buchrader Weg 2";"Sportplatz des VfL Rethwisch";0;4;99;10,4401006536605;53,78423965
+"100";"GÃ¶ttinger Hallencup 2014";2014-02-01 09:30:00;2014-02-01 18:00:00;"Deutschland";"37073";"GÃ¶ttingen";"Theaterplatz 10";"Sporthalle des Max-Planck-Gymnasium, GÃ¶ttingen";8;8;100;9,9408013;51,5363581
+"101";"1. Kieler Nordderby";2014-04-05 10:00:00;2014-04-06 16:00:00;"Deutschland";"24143";"Kiel";"RÃ¶ntgenstraÃe 5";"Sportplatz des TUS Gaarden";12;12;101;10,1518678970631;54,3083559
+"102";"4. NRW Turnier";2014-04-05 10:00:00;2014-04-05 18:00:00;"Deutschland";"47249";"Duisburg";"Angertaler StraÃe / Cramer-Klett-Stra&a";"Erholungspark Biegerhof";16;14;102;NA;NA
+"103";"8. Berliner Juggerpokal";2014-05-03 10:00:00;2014-05-04 17:00:00;"Deutschland";"10965";"Berlin";"Tempelhofer Feld";"Ex-Flughafen Tempelhof, Berlin";28;27;103;13,4027557;52,4729578
+"104";"8. Berliner Juggerpokal -Jugendturnier-";2014-05-03 10:00:00;2014-05-04 17:00:00;"Deutschland";"10965";"Berlin";"Tempelhofer Feld";"Ex-Flughafen Tempelhof, Berlin";12;9;104;13,4027557;52,4729578
+"105";"8. Berliner Juggerpokal -Kinderturnier-";2014-05-03 10:00:00;2014-05-04 17:00:00;"Deutschland";"10965";"Berlin";"Tempelhofer Feld";"Ex-Flughafen Tempelhof, Berlin";8;8;105;13,4027557;52,4729578
+"106";"12. Badische Meisterschaft";2014-05-10 10:00:00;2014-05-10 18:00:00;"Deutschland";"78050";"Villingen";"Vor Haslen 4";"Jugendtreff Chilly";16;15;106;8,4577546;48,0776487
+"107";"7. ThÃ¼ringer Meisterschaft";2014-05-17 10:00:00;2014-05-18 17:00:00;"Deutschland";"";"Jena";"Oberaue";"Jena";36;36;107;11,5875742571875;50,9204859
+"108";"Holt euch die Banane!";2014-05-24 09:00:00;2014-05-24 17:00:00;"Deutschland";"92237";"Sulzbach-Rosenberg";"Neukirchner Weg 39";"Sportplatz des SV-Kauerhof";12;11;108;11,7051707;49,5068669
+"109";"1. SÃ¼dwest Regionalturnier";2014-05-24 10:30:00;2014-05-24 17:00:00;"Deutschland";"66424";"Homburg";"Steinbachstr. 111";"Sportzentrum Homburg Erbach";10;10;109;7,333078;49,3463653
+"110";"14. Bayerische Meisterschaft";2014-05-31 09:30:00;2014-05-31 22:00:00;"Deutschland";"92726";"Waidhaus";"An der Bahn 2";"TSV SportgelÃ¤nde";16;9;110;12,4967105;49,6400456
+"111";"1. Deutsche Meisterschaft fÃ¼r Kinder- und Jugendmannschaften -Jugendturnier-";2014-06-06 18:00:00;2014-06-08 16:00:00;"Deutschland";"36199";"Rotenburg a. d. Fulda";"Breitinger Kirchweg 6";"Rotenburg a. d. Fulda";16;13;111;9,736715;50,9932181
+"112";"1. Deutsche Meisterschaft fÃ¼r Kinder- und Jugendmannschaften -Kinderturnier-";2014-06-06 18:00:00;2014-06-08 16:00:00;"Deutschland";"36199";"Rotenburg a. d. Fulda";"Breitinger Kirchweg 6";"Rotenburg a. d. Fulda";12;6;112;9,736715;50,9932181
+"113";"1. Bremer Landesmeisterschaft";2014-06-07 10:00:00;2014-06-08 16:00:00;"Deutschland";"28201";"Bremen";"Weg zum KrÃ¤henberg 1";"Bremen";16;15;113;8,8223004;53,0632417
+"114";"3. Hagener Jugger Cup";2014-06-14 09:30:00;2014-06-15 09:30:00;"Deutschland";"58097";"Hagen";"Am Sportpark";"Rasenplatz am HÃ¶ing";20;20;114;7,4755535;51,3671591
+"115";"2. Cottbuser Jugger Turnier";2014-06-28 10:00:00;2014-06-29 16:00:00;"Deutschland";"03044";"Cottbus";"Walther-Pauer-StraÃe 3";"Sportplatz BTU Cottbus-Senftenber";12;11;115;14,3248696816474;51,76903075
+"116";"6. Hessische Meisterschaft";2014-07-05 08:30:00;2014-07-05 19:00:00;"Deutschland";"64289";"Darmstadt";"Kranichsteiner StraÃe 183";"Sportplatz Ziegelbusch der TG 1875 Darmstadt";20;20;116;8,6723973;49,8899555
+"117";"1. Teuto Tournament";2014-07-05 10:00:00;2014-07-06 16:00:00;"Deutschland";"33609";"Bielefeld";"Heeper Fichten";"KÃ¤figplatz an der Radrennbahn";24;14;117;8,5854349;52,0345594
+"118";"9. Schleswig-Holstein Meisterschaft";2014-07-12 09:00:00;2014-07-13 17:00:00;"Deutschland";"23847";"Rethwisch";"Buchrader Weg 2";"Sportplatz des VfL Rethwisch";18;14;118;10,4401006536605;53,78423965
+"119";"1. Ruhrpott-Pott";2014-07-19 09:00:00;2014-07-19 19:00:00;"Deutschland";"44894";"Bochum";"Everstalstr. 91";"Sportplatz EverstalstraÃe";16;6;119;7,334741;51,4928541
+"120";"1. Mitteldeutsche Meisterschaft";2014-07-26 10:00:00;2014-07-27 16:00:00;"Deutschland";"06108";"Halle Saale";"PeiÃnitzstraÃe";"Sportplatz Ziegelwiese";16;10;120;11,9568511;51,4930211
+"121";"1. Kampf um die rote Stadt";2014-08-02 09:00:00;2014-08-03 16:00:00;"Deutschland";"27367";"Rotenburg (WÃ¼mme)";"Buchenende 11";"BÃ¶tersen";10;4;121;9,3080182;53,1407347
+"122";"2. Bergische Meisterschaft";2014-08-02 10:00:00;2014-08-03 16:00:00;"Deutschland";"42285";"Wuppertal";"Oberbergische Str. 91";"Wuppertal";20;16;122;7,17908785;51,2523273
+"123";"1. FrÃ¤ngsche Meisterschaft";2014-08-08 22:00:00;2014-08-10 16:00:00;"Deutschland";"91056";"NÃ¼rnberg";"Karl-May-Str. 39";"Erlangen";16;12;123;11,0592872;49,4735212
+"124";"20. Hamburger Meisterschaft";2014-08-09 10:00:00;2014-08-10 16:30:00;"Deutschland";"22303";"Hamburg";"SaarlandstraÃe";"Stadtpark KrÃ¤henwiese / Rugby GelÃ¤nde FC St. Pauli";24;18;124;10,0316818;53,5957328
+"125";"3. Berlin Masters";2014-08-16 09:30:00;2014-08-17 16:00:00;"Deutschland";"10965";"Berlin";"Columbiadamm 111";"VereinsgelÃ¤nde Turngemeinde in Berlin 1848 e.V.";24;20;125;13,4079108;52,4826748
+"126";"2. Greifswalder Strandturnier";2014-08-23 10:00:00;2014-08-23 18:00:00;"Deutschland";"17493";"Greifswald";"Yachtweg 1";"Greifswald-Eldena";8;5;126;13,4496172;54,0932255
+"127";"17. Deutsche Meisterschaft";2014-09-13 10:00:00;2014-09-14 15:00:00;"Deutschland";"78050";"Villingen";"Im Friedengrund 2";"Villingen";80;64;127;8,43247565;48,0575478
+"128";"1. Bamberger Jugger Turnier - Voll abgepompft";2014-10-04 08:00:00;2014-10-04 20:00:00;"Deutschland";"96049";"Bamberg";"Galgenfuhr 1";"Bamberg";10;10;128;10,9131316;49,8829392
+"129";"OJL Finals / Freiburg Cup";2014-10-11 09:30:00;2014-10-11 18:00:00;"Deutschland";"79110";"Freiburg";"FalkenbergerstraÃe 21";"Bolzplatz bei Ãkostation";10;8;129;7,8238526;48,0138942
+"130";"3. GÃ¶ttinger Winterturnier";2015-02-28 09:30:00;2015-02-28 19:30:00;"Deutschland";"37073";"GÃ¶ttingen";"Theaterplatz 10";"Sporthalle des Max-Planck Gymnasiums";9;9;130;9,9408013;51,5363581
+"131";"1. Karlsruher PÃ¶mmelturnier";2015-04-18 09:00:00;2015-04-18 18:00:00;"Deutschland";"76133";"Karlsruhe";"LÃ¤rchenallee";"Asta-Sportplatz Koordinaten: 49.016388, 8.410824";12;12;131;8,4182643;49,0192045
+"132";"2. Kieler Nordderby";2015-04-18 10:00:00;2015-04-19 17:00:00;"Deutschland";"24143";"Kiel";"RÃ¶ntgenstraÃe 5";"Sportplatz des TUS Gaarden";16;16;132;10,1518678970631;54,3083559
+"133";"Rotenburger Stadtklopperei -Jugendturnier-";2015-04-19 09:00:00;2015-04-19 19:00:00;"Deutschland";"36199";"Rotenburg a. d. Fulda";"Breitinger Kirchweg 16";"Rotenburg a. d. Fulda";8;4;133;9,7409885;50,9931968
+"134";"9. Berliner Juggerpokal -Jugendturnier-";2015-04-25 09:00:00;2015-04-26 17:00:00;"Deutschland";"10965";"Berlin";"Tempelhofer Feld";"Ex-Flughafen Tempelhof, Berlin";12;8;134;13,4027557;52,4729578
+"135";"9. Berliner Juggerpokal -Kinderturnier-";2015-04-25 09:00:00;2015-04-26 17:00:00;"Deutschland";"10965";"Berlin";"Tempelhofer Feld";"Ex-Flughafen Tempelhof, Berlin";8;5;135;13,4027557;52,4729578
+"136";"9. Berliner Juggerpokal";2015-04-25 10:00:00;2015-04-26 17:00:00;"Deutschland";"10965";"Berlin";"Tempelhofer Feld";"Ex-Flughafen Tempelhof, Berlin";24;21;136;13,4027557;52,4729578
+"137";"2. SÃ¼dwest Regionalturnier";2015-05-02 09:30:00;2015-05-02 18:00:00;"Deutschland";"66424";"Homburg";"Steinbachstr. 111";"Sportzentrum Homburg Erbach";16;16;137;7,333078;49,3463653
+"138";"13. Badische Meisterschaft";2015-05-09 10:00:00;2015-05-09 19:00:00;"Deutschland";"78050";"Villingen";"Vor Haslen 4";"Jugendtreff Chilly";16;16;138;8,4577546;48,0776487
+"139";"2. Kampf um die rote Stadt";2015-05-23 09:00:00;2015-05-24 16:00:00;"Deutschland";"27404";"Rotenburg (WÃ¼mme)";"Neue Str. 2";"Elsdorf OT Hatzte";12;12;139;9,1538794;53,4850297
+"140";"Ligaqualifikation West [1/3]";2015-05-30 08:00:00;2015-05-30 18:00:00;"Deutschland";"58097";"Hagen";"Am HÃ¶ing";"Sportplatz HÃ¶ing - Rasenplatz";0;6;140;7,4795869;51,367939
+"141";"9. SaarlÃ¤ndische Meisterschaft";2015-05-30 09:30:00;2015-05-30 19:00:00;"Deutschland";"66424";"Homburg";"Steinbachstr. 111";"Sportzentrum Homburg Erbach";16;16;141;7,333078;49,3463653
+"142";"Ligaqualifikation Nord-West";2015-06-06 09:30:00;2015-06-06 18:00:00;"Deutschland";"30167";"Hannover";"An der Graft 1";"SV Odin von 1905 e.V.";0;10;142;9,70084354260108;52,38342585
+"143";"Respect Gaymes 2015";2015-06-06 10:00:00;2015-06-06 17:00:00;"Deutschland";"10437";"Berlin";"CantianstraÃe 24";"Friedrich-Ludwig-Jahn-Sportpark";0;5;143;13,4107017;52,5443748
+"144";"4. Hagener Jugger Cup";2015-06-13 09:00:00;2015-06-13 18:00:00;"Deutschland";"58097";"Hagen";"Am HÃ¶ing";"Sportplatz HÃ¶ing - Rasenplatz";16;16;144;7,4795869;51,367939
+"145";"8. ThÃ¼ringer Meisterschaft";2015-06-20 08:00:00;2015-06-21 16:00:00;"Deutschland";"07745";"Jena";"Oberaue 1";"Jena";40;36;145;11,5836561;50,9180893
+"146";"Holt euch die Banane! 2015";2015-06-20 09:00:00;2015-06-20 17:00:00;"Deutschland";"92237";"Sulzbach-Rosenberg";"92281 KÃ¶nigstein";"Neuhauser Str. 40";16;16;146;NA;NA
+"147";"2. Deutsche Meisterschaft fÃ¼r Kinder- und Jugendmannschaften -Jugendturnier-";2015-06-26 18:00:00;2015-06-28 17:00:00;"Deutschland";"59555";"Lippstadt";"Harkortweg";"Jahnplatz";12;11;147;8,33126284098203;51,67408145
+"148";"2. Deutsche Meisterschaft fÃ¼r Kinder- und Jugendmannschaften -Kinderturnier-";2015-06-26 18:00:00;2015-06-28 17:00:00;"Deutschland";"59555";"Lippstadt";"Harkortweg";"Jahnplatz";12;9;148;8,33126284098203;51,67408145
+"149";"4. Berlin Masters";2015-06-27 10:00:00;2015-06-28 16:00:00;"Deutschland";"10965";"Berlin";"Columbiadamm 111";"VereinsgelÃ¤nde der Turngemeinde in Berlin 1848 e.V.";10;10;149;13,4079108;52,4826748
+"150";"2. Mitteldeutsche Meisterschaft";2015-07-04 10:00:00;2015-07-05 16:00:00;"Deutschland";"06108";"Halle Saale";"PeiÃnitzstraÃe";"Sportplatz Ziegelwiese";16;12;150;11,9568511;51,4930211
+"151";"Ligaqualifikation West [2/3] / 2. Ruhrpott-Pott";2015-07-04 10:00:00;2015-07-04 18:00:00;"Deutschland";"44894";"Bochum";"Everstalstr. 91";"Sportplatz EverstalstraÃe";16;11;151;7,334741;51,4928541
+"152";"10. Schleswig-Holstein Meisterschaft";2015-07-11 09:00:00;2015-07-12 17:00:00;"Deutschland";"23847";"Rethwisch";"Buchrader Weg 2";"Sportplatz des VfL Rethwisch";18;14;152;10,4401006536605;53,78423965
+"153";"15. Bayerische Meisterschaft";2015-07-11 09:30:00;2015-07-12 12:00:00;"Deutschland";"92726";"Waidhaus";"An der Bahn 2";"TSV Sportplatz";20;15;153;12,4967105;49,6400456
+"154";"Ligaqualifikation West [3/3]";2015-07-11 10:00:00;2015-07-12 16:30:00;"Deutschland";"36199";"Rotenburg a. d. Fulda";"Braacher Str. 18 A";"Rotenburg a. d. Fulda";16;4;154;9,7156967;51,0018995
+"155";"1. Leipziger JuggernÃ¤chte";2015-07-18 10:00:00;2015-07-19 16:00:00;"Deutschland";"04279";"Leipzig";"Goethesteig 2";"Leipzig";12;10;155;12,3866982;51,2896989
+"156";"2. Bamberger Jugger Turnier - Zur goldenen Pompfe";2015-07-25 08:30:00;2015-07-25 19:00:00;"Deutschland";"96050";"Bamberg";"Kloster-Langheim-StraÃe 11";"Bamberg";16;9;156;10,9125439687328;49,89873075
+"157";"1. Juggerturnier am Hohen Ufer";2015-07-25 09:00:00;2015-07-26 17:00:00;"Deutschland";"30167";"Hannover";"An der Graft 1";"SV Odin von 1905 e.V.";32;22;157;9,70084354260108;52,38342585
+"158";"1. Rheinland-PfÃ¤lzische Meisterschaft";2015-08-01 09:00:00;2015-08-01 19:00:00;"Deutschland";"";"Mainz";"Jahnhalle am Kaiser Friedrich Turm";"55411 Bingen";20;19;158;NA;NA
+"159";"3. Bergische Meisterschaft";2015-08-01 10:00:00;2015-08-02 16:00:00;"Deutschland";"42285";"Wuppertal";"Oberbergische Strasse 91";"Wuppertal";16;14;159;7,17908785;51,2523273
+"160";"2. FrÃ¤ngsche Meisterschaft";2015-08-07 16:00:00;2015-08-09 19:00:00;"Deutschland";"91056";"NÃ¼rnberg";"Karl-May-Str. 39";"TSV-Frauenaurach";20;14;160;11,0592872;49,4735212
+"161";"21. Hamburger Meisterschaft";2015-08-15 10:01:00;2015-08-16 16:30:00;"Deutschland";"22303";"Hamburg";"SaarlandstraÃe";"Stadtpark KrÃ¤henwiese / Rugby GelÃ¤nde FC St. Pauli";24;21;161;10,0316818;53,5957328
+"162";"7. Hessische Meisterschaft";2015-08-22 08:30:00;2015-08-22 19:30:00;"Deutschland";"64289";"Darmstadt";"Kranichsteiner StraÃe 183";"Sportplatz Ziegelbusch der TG 1875 Darmstadt";20;17;162;8,6723973;49,8899555
+"163";"2. Teuto Tournament";2015-08-22 10:00:00;2015-08-23 16:00:00;"Deutschland";"33609";"Bielefeld";"Heeper Fichten";"KÃ¤figplatz an der Radrennbahn";0;8;163;8,5854349;52,0345594
+"164";"3. Greifswalder Strandturnier";2015-08-22 10:00:00;2015-08-22 18:00:00;"Deutschland";"";"Greifswald";"Eldena";"Strandbad-Eldena";8;6;164;13,4477117849118;54,09675855
+"165";"18. Deutsche Meisterschaft";2015-08-29 10:00:00;2015-08-30 16:00:00;"Deutschland";"10965";"Berlin";"Tempelhofer Feld";"Ex-Flughafen Tempelhof, Berlin";64;61;165;13,4027557;52,4729578
+"166";"GJL Playoff 2015";2015-09-05 09:00:00;2015-09-06 16:30:00;"Deutschland";"10965";"Berlin";"Columbiadamm 111";"VereinsgelÃ¤nde der Turngemeinde in Berlin 1848 e.V.";24;23;166;13,4079108;52,4826748
+"167";"OJL Finals / Freiburg Cup";2015-09-19 08:00:00;2015-09-19 18:00:00;"Deutschland";"79379";"Freiburg";"Im Biefang";"Britzingen";12;9;167;7,7001351;47,8602624
+"168";"11. Moshen im Park";2015-10-03 10:00:00;2015-10-03 18:00:00;"Deutschland";"23847";"Rethwisch";"Buchrader Weg 2";"Sportplatz des VfL Rethwisch";0;6;168;10,4401006536605;53,78423965
+"169";"Rotenburger Stadtklopperei -Jugendturnier-";2016-02-21 10:00:00;2016-02-21 19:00:00;"Deutschland";"36199";"Rotenburg a. d. Fulda";"Breitinger Kirchweg 16";"Rotenburg a. d. Fulda";8;8;169;9,7409885;50,9931968
+"170";"1. Hallenturnier in Oldenburg";2016-03-19 10:00:00;2016-03-20 16:00:00;"Deutschland";"";"Oldenburg";"An Querkananal";"Halle am Querkanal";16;16;170;NA;NA
+"171";"2. Karlsruher PÃ¶mmelturnier";2016-04-16 08:00:00;2016-04-16 19:59:00;"Deutschland";"76133";"Karlsruhe";"LÃ¤rchenallee";"Asta-Sportplatz Koordinaten: 49.016388, 8.410824";16;16;171;8,4182643;49,0192045
+"172";"10. Berliner Juggerpokal";2016-04-16 09:00:00;2016-04-17 17:00:00;"Deutschland";"10965";"Berlin";"Tempelhofer Feld";"Ex-Flughafen Tempelhof, Berlin";24;24;172;13,4027557;52,4729578
+"173";"3. Kieler Nordderby";2016-04-23 09:00:00;2016-04-24 17:00:00;"Deutschland";"24143";"Kiel";"RÃ¶ntgenstraÃe 5";"Sportplatz des TUS Gaarden";20;19;173;10,1518678970631;54,3083559
+"174";"3. SÃ¼dwest Regionalturnier";2016-05-14 08:30:00;2016-05-14 18:00:00;"Deutschland";"66424";"Homburg";"Steinbachstr. 111";"Sportzentrum Homburg Erbach";21;21;174;7,333078;49,3463653
+"175";"3. Kampf um die rote Stadt";2016-05-14 09:00:00;2016-05-15 16:00:00;"Deutschland";"27404";"Rotenburg (WÃ¼mme)";"Neue Str. 2";"Elsdorf OT Hatzte";12;12;175;9,1538794;53,4850297
+"176";"14. Badische Meisterschaft";2016-05-15 09:00:00;2016-05-15 18:00:00;"Deutschland";"78050";"Villingen";"Vor Haslen 4";"Jugendtreff Chilly";16;15;176;8,4577546;48,0776487
+"177";"Holt euch die Banane! 2016";2016-05-28 08:00:00;2016-05-28 19:00:00;"Deutschland";"92281";"Sulzbach-Rosenberg";"Neuhauser Str. 40";"KÃ¶nigstein";16;16;177;NA;NA
+"178";"2. Rheinland-PfÃ¤lzische Meisterschaft";2016-06-04 09:00:00;2016-06-05 15:00:00;"Deutschland";"";"Mainz";"Jahnhalle am Kaiser Friedrich Turm";"55411 Bingen am Rhein";24;22;178;NA;NA
+"179";"3. Deutsche Meisterschaft fÃ¼r Kinder- und Jugendmannschaften -Jugendturnier-";2016-06-04 09:00:00;2016-06-05 16:00:00;"Deutschland";"23847";"Rethwisch";"Buchrader Weg 2";"Sportplatz des VfL Rethwisch";13;13;179;10,4401006536605;53,78423965
+"180";"3. Deutsche Meisterschaft fÃ¼r Kinder- und Jugendmannschaften -Kinderturnier-";2016-06-04 09:00:00;2016-06-05 16:00:00;"Deutschland";"23847";"Rethwisch";"Buchrader Weg 2";"Sportplatz des VfL Rethwisch";12;10;180;10,4401006536605;53,78423965
+"181";"3. Mitteldeutsche Meisterschaft";2016-06-11 09:00:00;2016-06-12 16:00:00;"Deutschland";"06108";"Halle Saale";"PeiÃnitzstraÃe";"Sportplatz Ziegelwiese";16;13;181;11,9568511;51,4930211
+"182";"Graf-Bernhard-Pokal 2016";2016-06-11 09:00:00;2016-06-12 16:00:00;"Deutschland";"59555";"Lippstadt";"Harkortweg";"Jahnplatz";20;11;182;8,33126284098203;51,67408145
+"183";"5. Berlin Masters";2016-06-11 10:00:00;2016-06-12 16:00:00;"Deutschland";"10965";"Berlin";"Columbiadamm 111";"Berlin";0;7;183;13,4079108;52,4826748
+"184";"Ligaqualifikation Nord-West";2016-06-18 10:00:00;2016-06-18 20:00:00;"Deutschland";"30167";"Hannover";"An der Graft 1";"SV Odin von 1905 e.V.";0;10;184;9,70084354260108;52,38342585
+"185";"9. ThÃ¼ringer Meisterschaft";2016-06-24 17:00:00;2016-06-26 17:00:00;"Deutschland";"07745";"Jena";"Oberaue 1";"Jena";24;22;185;11,5836561;50,9180893
+"186";"5. Hagener Jugger Cup";2016-06-25 09:00:00;2016-06-26 18:00:00;"Deutschland";"58097";"Hagen";"Am HÃ¶ing";"Sportplatz HÃ¶ing - Rasenplatz";16;13;186;7,4795869;51,367939
+"187";"4. Turnier zu MÃ¼nster";2016-07-02 09:00:00;2016-07-02 19:00:00;"Deutschland";"48165";"MÃ¼nster";"Osttor 85";"Sportplatz TuS Hilturp";12;12;187;7,6688443;51,9068543
+"188";"Respect Gaymes 2016";2016-07-02 10:00:00;2016-07-02 18:30:00;"Deutschland";"10437";"Berlin";"CantianstraÃe 24";"Friedrich-Ludwig-Jahn-Sportpark";10;7;188;13,4107017;52,5443748
+"189";"2. Leipziger JuggernÃ¤chte";2016-07-08 18:00:00;2016-07-10 17:00:00;"Deutschland";"04279";"Leipzig";"Goethesteig 2";"Leipzig";16;15;189;12,3866982;51,2896989
+"190";"4. Bergische Meisterschaft";2016-07-08 18:00:00;2016-07-10 16:00:00;"Deutschland";"42285";"Wuppertal";"Oberbergische Strasse 91";"Wuppertal";20;20;190;7,17908785;51,2523273
+"191";"1. Flensburger Nordstern Turnier";2016-07-09 10:00:00;2016-07-10 16:00:00;"Deutschland";"24937";"Flensburg";"Westerallee 49";"Sportplatz des PSV";12;10;191;9,40726660821985;54,7819698
+"192";"1. Berlin Masters der Kinder";2016-07-16 10:00:00;2016-07-16 18:00:00;"Deutschland";"10965";"Berlin";"Columbiadamm 111";"VereinsgelÃ¤nde der Turngemeinde in Berlin 1848 e.V.";8;3;192;13,4079108;52,4826748
+"193";"22. Hamburger Meisterschaft";2016-07-16 10:00:00;2016-07-17 16:30:00;"Deutschland";"22303";"Hamburg";"SaarlandstraÃe";"Stadtpark KrÃ¤henwiese / Rugby GelÃ¤nde FC St. Pauli";24;22;193;10,0316818;53,5957328
+"194";"16. Bayerische Meisterschaft";2016-07-23 08:00:00;2016-07-24 12:00:00;"Deutschland";"92726";"Waidhaus";"An der Bahn 3";"Waidhaus - TSV SportgelÃ¤nde";25;17;194;12,4967105;49,6400456
+"195";"2. Juggerturnier am Hohen Ufer";2016-07-23 09:00:00;2016-07-24 17:00:00;"Deutschland";"30167";"Hannover";"An der Graft 1";"Hannover";32;25;195;9,70084354260108;52,38342585
+"196";"3. Ruhrpott-Pott";2016-08-06 09:00:00;2016-08-06 19:00:00;"Deutschland";"44779";"Bochum";"SteinkuhlstraÃe 46";"Bochum";16;10;196;7,2423556;51,4649751
+"197";"4. Greifswalder Strandturnier";2016-08-06 09:00:00;2016-08-06 18:00:00;"Deutschland";"17493";"Greifswald";"An der Klosterruine 6";"Strandbad Eldena";7;7;197;13,4531238280125;54,0892697
+"198";"3. FrÃ¤ngsche Meisterschaft";2016-08-06 23:59:00;2016-08-07 00:00:00;"Deutschland";"91056";"NÃ¼rnberg";"Karl-May-StraÃe";"Erlangen - Frauenaurach";16;16;198;11,0592872;49,4735212
+"199";"1. (offizieller) Lahnveilchencup";2016-08-20 09:00:00;2016-08-20 19:00:00;"Deutschland";"35463";"GieÃen";"GraudornstraÃe";"fernwald albach";16;9;199;8,8011034;50,5528322
+"200";"GJL Playoff 2016";2016-08-20 09:00:00;2016-08-21 18:00:00;"Deutschland";"07745";"Jena";"Oberaue 1";"Jena";24;17;200;11,5836561;50,9180893
+"201";"19. Deutsche Meisterschaft";2016-09-02 17:00:00;2016-09-04 16:00:00;"Deutschland";"92726";"Waidhaus";"An der Bahn 2";"TSV Sportplatz";64;61;201;12,4967105;49,6400456
+"202";"2. Bremer Landesmeisterschaft";2016-09-10 08:00:00;2016-09-10 17:00:00;"Deutschland";"28201";"Bremen";"Weg zum KrÃ¤henberg 1";"Bremen";8;8;202;8,8223004;53,0632417
+"203";"8. Hessische Meisterschaft";2016-09-17 08:00:00;2016-09-17 18:00:00;"Deutschland";"64289";"Darmstadt";"Kranichsteiner StraÃe";"Stadion im BÃ¼rgerpark";11;11;203;8,6764185;49,8939064
+"204";"1. Dorfturnier RÃ¶ttenbach";2016-09-17 09:00:00;2016-09-17 17:00:00;"Deutschland";"91341";"RÃ¶ttenbach";"SchulstrÃe";"Grundschule Sportplatz";10;8;204;NA;NA
+"205";"12. Moshen im Park";2016-09-17 10:00:00;2016-09-19 18:00:00;"Deutschland";"23847";"Rethwisch";"Buchrader Weg 2";"Sportplatz des VfL Rethwisch";0;6;205;10,4401006536605;53,78423965
+"206";"10. SaarlÃ¤ndische Meisterschaft";2016-09-24 08:30:00;2016-09-24 19:00:00;"Deutschland";"66424";"Homburg";"Steinbachstr. 111";"Sportzentrum Homburg Erbach";17;17;206;7,333078;49,3463653
+"207";"2. Hanseatic Jugger Cup";2016-09-24 10:00:00;2016-09-25 16:00:00;"Deutschland";"23556";"LÃ¼beck";"AlexanderstraÃe 2b,";"Freibad Marli / DrÃ¤gerpark";16;14;207;10,7094442;53,8727307
+"208";"3. Bamberger Jugger Turnier - Zur goldenen Pompfe";2016-10-08 09:00:00;2016-10-08 19:00:00;"Deutschland";"96050";"Bamberg";"Kloster-Langheim-StraÃe 11";"Bamberg";16;15;208;10,9125439687328;49,89873075
+"209";"Juggerlabor Bochum: Kette mit 5 statt 8 Steinen-Testturnier";2016-10-09 09:00:00;2016-10-09 19:00:00;"Deutschland";"44779";"Bochum";"SteinkuhlstraÃe 46";"Bochum";16;9;209;7,2423556;51,4649751
+"210";"Hallen-Turnier in Ahaus";2016-11-27 09:00:00;2016-11-27 18:00:00;"Deutschland";"48683";"Ahaus";"Hof zum Ahaus 8";"Sporthalle I Vestert";12;9;210;6,9972836;52,0811259
+"211";"1. Auenlandbob";2017-01-07 09:00:00;2017-01-07 17:00:00;"Deutschland";"69121";"Heidelberg";"Dossenheimer LandstraÃe 125";"Heidelberg";12;5;211;8,6794526;49,4382046
+"212";"4. GÃ¶ttinger Winterturnier";2017-01-28 09:00:00;2017-01-28 19:00:00;"Deutschland";"37073";"GÃ¶ttingen";"Theaterplatz 10";"GÃ¶ttingen";9;9;212;9,9408013;51,5363581
+"213";"1. Bonner Hallenturnier";2017-02-05 08:00:00;2017-02-05 18:00:00;"Deutschland";"53119";"Bonn";"Hirschberger StraÃe";"Sporthalle im Schulzentrum Tannenbusch";10;9;213;7,04231135608501;50,75040605
+"214";"Rotenburger Stadtklopperei -Jugendturnier-";2017-02-12 10:00:00;2017-02-12 19:00:00;"Deutschland";"36199";"Rotenburg a. d. Fulda";"Breitinger Kirchweg 16";"Rotenburg a. d. Fulda";8;8;214;9,7409885;50,9931968
+"215";"1. Bochumer Winterturnier";2017-02-19 09:00:00;2017-02-19 20:00:00;"Deutschland";"44799";"Bochum";"MarkstraÃe 189";"Erich KÃ¤stner-Schule (Halle 1)";8;8;215;7,2555133;51,4591009
+"216";"OJL Finals 2016";2017-03-04 10:00:00;2017-03-04 17:00:00;"Deutschland";"64295";"Darmstadt";"KronstÃ¤dter Weg 12";"SG Eiche Darmstadt 1951 e.V.";6;6;216;8,6232453;49,8507007
+"217";"1. Rookie-Turnier in Ahaus";2017-03-05 09:00:00;2017-03-05 18:00:00;"Deutschland";"48683";"Ahaus";"Hof zum Ahaus 8";"Sporthalle I Vestert";6;5;217;6,9972836;52,0811259
