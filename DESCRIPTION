@@ -1,7 +1,7 @@
 Package: juggerdata
 Type: Package
 Title: A package containing all the datasets from the juggerdata project for reuseability
-Version: 1.0.0
+Version: 1.0.1
 Authors@R: person(c("Christian", "(Becko)"), "Beck", email = "luebeckogm@gmail.com", role = c("aut", "cre"))
 Description: Jugger related data sets - as discussed on my blog jugger-data (https://juggerdata.blogspot.de/).
     This package is intended to be used as a central repository, such that everybody can start doing analysis without much prior work.
