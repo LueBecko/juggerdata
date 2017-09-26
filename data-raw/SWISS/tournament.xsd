@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+   <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+         <!-- XML Schema Generated from XML Document on Wed Sep 13 2017 22:42:35 GMT+0200 (CEST) -->
+         <!-- with XmlGrid.net Free Online Service http://xmlgrid.net -->
+         <xs:element name="tournament">
+               <xs:complexType>
+                     <xs:sequence>
+                           <xs:element name="scoreCalculator">
+                                 <xs:complexType>
+                                       <xs:attribute name="type" type="xs:string"></xs:attribute>
+                                 </xs:complexType>
+                           </xs:element>
+                           <xs:element name="rankingComparator">
+                                 <xs:complexType>
+                                       <xs:attribute name="type" type="xs:string"></xs:attribute>
+                                 </xs:complexType>
+                           </xs:element>
+                           <xs:element name="teams">
+                                 <xs:complexType>
+                                       <xs:sequence>
+                                             <xs:element name="team" maxOccurs="unbounded">
+                                                   <xs:complexType>
+                                                         <xs:attribute name="name" type="xs:string"></xs:attribute>
+                                                         <xs:attribute name="city" type="xs:string"></xs:attribute>
+                                                   </xs:complexType>
+                                             </xs:element>
+                                       </xs:sequence>
+                                 </xs:complexType>
+                           </xs:element>
+                           <xs:element name="rounds">
+                                 <xs:complexType>
+                                       <xs:sequence>
+                                             <xs:element name="round" maxOccurs="unbounded">
+                                                   <xs:complexType>
+                                                         <xs:sequence>
+                                                               <xs:element name="match" maxOccurs="unbounded">
+                                                                     <xs:complexType>
+                                                                           <xs:attribute name="teamA" type="xs:int"></xs:attribute>
+                                                                           <xs:attribute name="teamB" type="xs:int"></xs:attribute>
+                                                                           <xs:attribute name="pointsA" type="xs:int"></xs:attribute>
+                                                                           <xs:attribute name="pointsB" type="xs:int"></xs:attribute>
+                                                                           <xs:attribute name="finished" type="xs:string"></xs:attribute>
+                                                                     </xs:complexType>
+                                                               </xs:element>
+                                                         </xs:sequence>
+                                                   </xs:complexType>
+                                             </xs:element>
+                                       </xs:sequence>
+                                 </xs:complexType>
+                           </xs:element>
+                     </xs:sequence>
+                     <xs:attribute name="version" type="xs:int"></xs:attribute>
+               </xs:complexType>
+         </xs:element>
+   </xs:schema>
