@@ -10,7 +10,7 @@ License: CC0
 Encoding: UTF-8
 LazyData: true
 Depends: R (>= 2.10)
-Imports: xml2, testthat, assertthat
+Imports: xml2, testthat, testthatsomemore, assertthat
 Suggests: dplyr, readr, XML, RJSONIO, knitr
 URL: https://juggerdata.blogspot.de/
 BugReports: https://github.com/LueBecko/juggerdata/issues
