@@ -1,3 +1,6 @@
+# juggerdata 1.1.0 (in preparation)
+* adding SWISS torunament support
+
 # juggerdata 1.0.1
 
 * Played around with pkgdown and stuff. Just cosmetics.
