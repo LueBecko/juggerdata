@@ -1,4 +1,28 @@
-
+#' Read files of the SWISS tournament software
+#'
+#' \code{read_SWISS_tournament} returns all entries of a SWISS tournament.
+#'
+#' The SWISS tournament software is a old (2008) piece of software that allows
+#' to manage a jugger tournament as a variant of the SWISS system. It returns a
+#' XML file with all tournament information, teams, rounds, matches and results.
+#' This function reads those information into R for analysis purposes.
+#'
+#' @param filename name of the XML file rturned by the program
+#' @return a list with the following entries: tournament_version (integer),
+#' score_calculation (character), ranking_comparator (character), teams
+#' (a data.frame of teams) and rounds (a data.frame of all rounds and matches)
+#'
+#' teams has the columns: entry_id (integer), team_name (character), team_city (character)
+#' rounds has the columns: round (integer), game (interger), entry_id1 (integer),
+#' entry_id2 (integer), points1 (integer), points2 (integer), finished (logical)
+#'
+#' @author Christian Beck
+#'
+#' @examples
+#'
+#' \dontrun{
+#' hanseaticjuggercup2014 <- read_SWISS_tournament("HanseaticJuggerCupR6")
+#' }
 read_SWISS_tournament <- function(filename) {
   assertthat::assert_that(is.character(filename))
   assertthat::assert_that(file.exists(filename))
