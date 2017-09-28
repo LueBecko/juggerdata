@@ -1,0 +1,13 @@
+<tournament version="1">
+  <scoreCalculator type="TwoPoints"/>
+  <rankingComparator type="Buchholz"/>
+  <teams>
+      <team name="T1" city="S1"/>
+      <team name="T2" city="S2"/>
+  </teams>
+  <rounds>
+    <round>
+       <match teamA="0" teamB="1" pointsA="0" pointsB="0" finished="false"/>
+    </round>
+  </rounds>
+</tournament>

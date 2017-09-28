@@ -1,5 +1,4 @@
 library(juggerdata)
-library(testthatsomemore)
 library(xml2)
 
 context("SWISS-tournament data import")
@@ -13,26 +12,11 @@ test_that("checks on filename input", {
 
 # using stubs to check correct file usage
 test_that("checks on XML to process", {
-  within_file_structure(list(invalid1 = '<<ui', invalid2 = '<elefant type="african" />'), {
-    expect_error(read_SWISS_tournament(file.path(tempdir,"invalid1")), "StartTag: invalid element name \\[68\\]") # not XML
-    expect_error(read_SWISS_tournament(file.path(tempdir,"invalid2")), "xml2::xml_validate\\(x = swiss, schema = schema\\) is not TRUE") # XML not in schema
-  })
+  expect_error(read_SWISS_tournament(file.path("testSWISSfiles","invalid1")), "StartTag: invalid element name \\[68\\]") # not XML
+  expect_error(read_SWISS_tournament(file.path("testSWISSfiles","invalid2")), "xml2::xml_validate\\(x = swiss, schema = schema\\) is not TRUE") # XML not in schema
 })
 
 ###################################
-empty_tournament <- '<tournament version="1">
-	<scoreCalculator type="TwoPoints"/>
-<rankingComparator type="Buchholz"/>
-<teams>
-<team name="T1" city="S1"/>
-<team name="T2" city="S2"/>
-</teams>
-<rounds>
-<round>
-<match teamA="0" teamB="1" pointsA="0" pointsB="0" finished="false"/>
-</round>
-</rounds>
-</tournament>'
 empty_results <- list(tournament_version = as.integer(1),
                       score_calculation = "TwoPoints",
                       ranking_comparator = "Buchholz",
@@ -47,46 +31,6 @@ empty_results <- list(tournament_version = as.integer(1),
                                           points2 = as.integer(0),
                                           finished = FALSE))
 
-example_tournament <- '<tournament version="1">
-<scoreCalculator type="TwoPoints"/>
-<rankingComparator type="Buchholz"/>
-<teams>
-<team name="MixTem" city=""/>
-<team name="LMS" city=""/>
-<team name="Victim" city=""/>
-<team name="Blutgrätsche" city=""/>
-<team name="Kmikze Eulen" city=""/>
-<team name="leere Menge" city=""/>
-<team name="GÄG" city=""/>
-<team name="WoR" city="Rotenburg"/>
-<team name="Bildungsurlub" city=""/>
-<team name="Pompfenjäger" city=""/>
-<team name="FKK" city=""/>
-<team name="Torpedo" city=""/>
-<team name="Keiler" city="Oldenburg"/>
-<team name="Mixerei" city=""/>
-</teams>
-<rounds>
-<round>
-<match teamA="12" teamB="7" pointsA="10" pointsB="4" finished="true"/>
-<match teamA="1" teamB="8" pointsA="13" pointsB="1" finished="true"/>
-<match teamA="13" teamB="10" pointsA="9" pointsB="8" finished="true"/>
-<match teamA="4" teamB="5" pointsA="2" pointsB="18" finished="true"/>
-<match teamA="3" teamB="2" pointsA="15" pointsB="2" finished="true"/>
-<match teamA="9" teamB="11" pointsA="4" pointsB="12" finished="true"/>
-<match teamA="6" teamB="0" pointsA="18" pointsB="3" finished="true"/>
-</round>
-<round>
-<match teamA="5" teamB="6" pointsA="10" pointsB="10" finished="true"/>
-<match teamA="3" teamB="1" pointsA="7" pointsB="9" finished="true"/>
-<match teamA="11" teamB="12" pointsA="11" pointsB="10" finished="true"/>
-<match teamA="13" teamB="7" pointsA="8" pointsB="7" finished="true"/>
-<match teamA="10" teamB="9" pointsA="8" pointsB="3" finished="true"/>
-<match teamA="8" teamB="2" pointsA="4" pointsB="11" finished="true"/>
-<match teamA="0" teamB="4" pointsA="11" pointsB="5" finished="true"/>
-</round>
-</rounds>
-</tournament>'
 example_results <- list(tournament_version = as.integer(1),
                         score_calculation = "TwoPoints",
                         ranking_comparator = "Buchholz",
@@ -117,9 +61,7 @@ example_results <- list(tournament_version = as.integer(1),
 
 # using stubs to check correct output
 test_that("checks on valid data output", {
-  within_file_structure(list(valid1 = empty_tournament, valid2 = example_tournament), {
-    expect_identical(read_SWISS_tournament(file.path(tempdir,"valid1")), empty_results)
-    expect_identical(read_SWISS_tournament(file.path(tempdir,"valid2")), example_results)
-  })
+  expect_identical(read_SWISS_tournament(file.path("testSWISSfiles","valid1")), empty_results)
+  expect_identical(read_SWISS_tournament(file.path("testSWISSfiles","valid2")), example_results)
 })
 
