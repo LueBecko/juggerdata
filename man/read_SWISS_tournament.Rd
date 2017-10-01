@@ -7,16 +7,31 @@
 read_SWISS_tournament(filename)
 }
 \arguments{
-\item{filename}{name of the XML file rturned by the program}
+\item{filename}{name of the XML file returned by the program}
 }
 \value{
-a list with the following entries: tournament_version (integer),
-score_calculation (character), ranking_comparator (character), teams
-(a data.frame of teams) and rounds (a data.frame of all rounds and matches)
-
-teams has the columns: entry_id (integer), team_name (character), team_city (character)
-rounds has the columns: round (integer), game (interger), entry_id1 (integer),
-entry_id2 (integer), points1 (integer), points2 (integer), finished (logical)
+a list with the following entries:
+\itemize{
+\item tournament_version (integer)
+\item score_calculation (character)
+\item ranking_comparator (character)
+\item teams (a data.frame of teams)
+  \itemize{
+    \item entry_id (integer)
+    \item team_name (character)
+    \item team_city (character)
+  }
+\item rounds (a data.frame of all rounds and matches)
+  \itemize{
+    \item round (integer)
+    \item game (interger)
+    \item entry_id1 (integer)
+    \item entry_id2 (integer)
+    \item points1 (integer)
+    \item points2 (integer)
+    \item finished (logical)
+  }
+}
 }
 \description{
 \code{read_SWISS_tournament} returns all entries of a SWISS tournament.
