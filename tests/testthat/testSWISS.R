@@ -30,6 +30,7 @@ empty_results <- list(tournament_version = as.integer(1),
                                           points1 = as.integer(0),
                                           points2 = as.integer(0),
                                           finished = FALSE))
+class(empty_results) <- "SWISS_tournament"
 
 example_results <- list(tournament_version = as.integer(1),
                         score_calculation = "TwoPoints",
@@ -58,9 +59,11 @@ example_results <- list(tournament_version = as.integer(1),
                                             points2   = as.integer(c( 4,  1,  8, 18,  2, 12,  3, 10,  9, 10,  7,  3, 11,  5)),
                                             finished  = rep(TRUE, 14)))
 
+class(example_results) <- "SWISS_tournament"
 
 # using stubs to check correct output
 test_that("checks on valid data output", {
+  expect_s3_class(read_SWISS_tournament(file.path("testSWISSfiles","valid1")), "SWISS_tournament")
   expect_identical(read_SWISS_tournament(file.path("testSWISSfiles","valid1")), empty_results)
   expect_identical(read_SWISS_tournament(file.path("testSWISSfiles","valid2")), example_results)
 })

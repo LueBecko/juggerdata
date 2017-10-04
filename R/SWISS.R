@@ -8,7 +8,7 @@
 #' This function reads those information into R for analysis purposes.
 #'
 #' @param filename name of the XML file returned by the program
-#' @return a list with the following entries:
+#' @return a S3 object SWISS_torunament, which is implemente as a list with the following entries:
 #' \itemize{
 #' \item tournament_version (integer)
 #' \item score_calculation (character)
@@ -153,5 +153,163 @@ read_SWISS_tournament <- function(filename) {
                      teams = teams,
                      rounds = rounds)
 
+  class(tournament) <- "SWISS_tournament"
   return(tournament)
+}
+
+
+summary.SWISS_tournament <- function(tournament) {
+  assertthat::assert_that(class(tournament) == 'SWISS_tournament')
+
+  ## scoring functions
+  score_KO <- function(won, draw) {
+    return (ifelse(won, 1, 0))
+  }
+
+  score_TwoPoints <- function(won, draw) {
+    return (ifelse(won, 2, ifelse(draw, 1, 0)))
+  }
+
+  score_ThreePoints <- function(won, draw) {
+    return (ifelse(won, 3, ifelse(draw, 1, 0)))
+  }
+
+  score_invalid <- function(won, draw) {
+    stop("unknown scoring function passed. Please review your data.")
+  }
+
+  score_apply <- switch(EXPR = tournament$score_calculation,
+                        KO = score_KO,
+                        TwoPoints = score_TwoPoints,
+                        ThreePoints = score_ThreePoints,
+                        score_invalid)
+
+  ## comparator functions
+  comparator_Buchholzzahl <- function(games) {
+    ranking <- order(games$score_cum, games$BHZ, games$points_diff_cum, games$points_cum,
+                     decreasing = rep(TRUE, 4))
+    return(ranking)
+  }
+
+  comparator_invalid <- function(games) {
+    stop("unknown ranking comparator. Please review your data.")
+  }
+
+  comparator_apply <- switch(EXPR = tournament$ranking_comparator,
+                             Buchholz = comparator_Buchholzzahl,
+                             comparator_invalid)
+
+  # games
+  teams_participating <- nrow(tournament$teams)
+
+  # only count all complete rounds
+  rounds_played <- length(setdiff(unique(tournament$rounds$round),
+                                  unique(tournament$rounds$round[!tournament$rounds$finished])))
+  rounds_scheduled <- length(unique(tournament$rounds$round))
+  matches_played <- sum(tournament$rounds$finished)
+  matches_scheduled <- nrow(tournament$rounds)
+
+  rounds <- tournament$rounds[tournament$rounds$finished,]
+  rounds$won1 <- rounds$points1  > rounds$points2
+  rounds$won2 <- rounds$points2  > rounds$points1
+  rounds$draw <- rounds$points1 == rounds$points2
+  rounds$points_diff1 <- rounds$points1 - rounds$points2
+  rounds$points_diff2 <- rounds$points2 - rounds$points1
+  rounds$score1 <- score_apply(rounds$won1, rounds$draw)
+  rounds$score2 <- score_apply(rounds$won2, rounds$draw)
+
+  rounds <- rbind(data.frame(round = rounds$round,
+                             entry_id = rounds$entry_id1,
+                             points = rounds$points1,
+                             won = rounds$won1,
+                             draw = rounds$draw,
+                             points_diff = rounds$points_diff1,
+                             score = rounds$score1,
+                             opp = rounds$entry_id2),
+                  data.frame(round = rounds$round,
+                             entry_id = rounds$entry_id2,
+                             points = rounds$points2,
+                             won = rounds$won2,
+                             draw = rounds$draw,
+                             points_diff = rounds$points_diff2,
+                             score = rounds$score2,
+                             opp = rounds$entry_id1) )
+
+  rounds <- rounds[order(rounds$round), ]
+
+  for (t in tournament$teams$entry_id) {
+    sel <- rounds$entry_id == t
+    games <- rounds[sel, ]
+    opp <- list()
+
+    # cumulate results
+    rounds$score_cum[sel] <- cumsum(games$score)
+    rounds$points_cum[sel] <- cumsum(games$points)
+    rounds$points_diff_cum[sel] <- cumsum(games$points_diff)
+
+    for (g in 1:nrow(games)) {
+
+      if (g == 1) {
+        opp[[g]] <- games$opp[g]
+      } else {
+        opp[[g]] <- c(games$opp[g], opp[[g - 1]])
+      }
+
+    }
+    rounds$opp[sel] <- opp
+  }
+
+  # computed BHZ (reversed from program)
+  for (r in 1:nrow(rounds)) {
+    rounds$BHZ[r] <- sum(rounds$score_cum[rounds$round == rounds$round[r] & rounds$entry_id %in% rounds$opp[r][[1]]])
+  }
+
+  # apply ranking comparator
+  for (r in 1:rounds_played) {
+    sel <- rounds$round == r
+    rounds$rank[sel] <- comparator_apply(rounds[sel,])
+  }
+
+  rounds <- rounds[order(rounds$rank),]
+  rounds <- rounds[order(rounds$round),]
+
+  # tournament_summary <- list(stats = list(teams_participating = teams_participating,
+  #                                         rounds_played = rounds_played, rounds_scheduled = rounds_scheduled,
+  #                                         matches_played = matches_played, matches_scheduled = matches_scheduled),
+  #                            params = list(tournament_version = tournament$tournament_version,
+  #                                          score_calculation = tournament$score_calculation,
+  #                                          ranking_comparator = tournament$ranking_comparator),
+  #                            teams = tournament$teams,
+  #                            games = tournament$rounds,
+  #                            rankings = rounds[,c(1,2,7:12)])
+
+  tournament_summary <- append(tournament, list(rankings = rounds[,c(1,2,7:12)],
+                                                stats = list(teams_participating = teams_participating,
+                                                             rounds_played = rounds_played, rounds_scheduled = rounds_scheduled,
+                                                             matches_played = matches_played, matches_scheduled = matches_scheduled)))
+
+  class(tournament_summary) <- c("SWISS_tournament_summary", "SWISS_tournament")
+  return(tournament_summary)
+}
+
+print.SWISS_tournament <- function(tournament, full_report = FALSE) {
+  print(summary(tournament), full_report = full_report)
+}
+
+print.SWISS_tournament_summary <- function(tournament_summary, full_report = FALSE) {
+  assertthat::assert_that(all(class(tournament_summary) == c("SWISS_tournament_summary", "SWISS_tournament")))
+
+  cat("=======================================\n")
+  cat(" SWISS-tournament summary\n\n")
+  cat(paste(" * tournament-version: ", toString(tournament_summary$tournament_version), "\n", sep = ""))
+  cat(paste(" * score-calculation: ", tournament_summary$score_calculation, "\n", sep = ""))
+  cat(paste(" * ranking-comparator: ", tournament_summary$ranking_comparator, "\n", sep = ""))
+  cat(paste("\n Setup a tournament for ", toString(tournament_summary$stats$teams_participating), " teams\n", sep = ""))
+  cat(paste("  with ", toString(tournament_summary$stats$rounds_played), " complete rounds played (", toString(tournament_summary$stats$rounds_scheduled), " scheduled)\n", sep = ""))
+  cat(paste("  and ", toString(tournament_summary$stats$matches_played), " finished games played (", toString(tournament_summary$stats$matches_scheduled), " scheduled)\n", sep = ""))
+  cat("\n=======================================\n")
+  cat(" Participating teams\n")
+  write.table(tournament_summary$teams, quote = FALSE, sep = "\t", row.names = FALSE)
+  cat("\n=======================================\n")
+  cat(" Rankings\n")
 }
