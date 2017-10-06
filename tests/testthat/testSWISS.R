@@ -58,7 +58,6 @@ example_results <- list(tournament_version = as.integer(1),
                                             points1   = as.integer(c(10, 13,  9,  2, 15,  4, 18, 10,  7, 11,  8,  8,  4, 11)),
                                             points2   = as.integer(c( 4,  1,  8, 18,  2, 12,  3, 10,  9, 10,  7,  3, 11,  5)),
                                             finished  = rep(TRUE, 14)))
-
 class(example_results) <- "SWISS_tournament"
 
 # using stubs to check correct output

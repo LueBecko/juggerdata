@@ -175,7 +175,7 @@ summary.SWISS_tournament <- function(tournament) {
   }
 
   score_invalid <- function(won, draw) {
-    stop("unknown scoring function passed. Please review your data.")
+    stop("Unknown scoring function. Please review your data.")
   }
 
   score_apply <- switch(EXPR = tournament$score_calculation,
@@ -192,7 +192,7 @@ summary.SWISS_tournament <- function(tournament) {
   }
 
   comparator_invalid <- function(games) {
-    stop("unknown ranking comparator. Please review your data.")
+    stop("Unknown ranking comparator. Please review your data.")
   }
 
   comparator_apply <- switch(EXPR = tournament$ranking_comparator,
@@ -202,7 +202,6 @@ summary.SWISS_tournament <- function(tournament) {
   # games
   teams_participating <- nrow(tournament$teams)
 
-  # only count all complete rounds
   rounds_played <- length(setdiff(unique(tournament$rounds$round),
                                   unique(tournament$rounds$round[!tournament$rounds$finished])))
   rounds_scheduled <- length(unique(tournament$rounds$round))
@@ -237,6 +236,13 @@ summary.SWISS_tournament <- function(tournament) {
 
   rounds <- rounds[order(rounds$round), ]
 
+  if (nrow(rounds) == 0) {
+    rounds$score_cum <- list()
+    rounds$points_cum <- list()
+    rounds$points_diff_cum <- list()
+    rounds$BHZ <- list()
+  }
+
   for (t in tournament$teams$entry_id) {
     sel <- rounds$entry_id == t
     games <- rounds[sel, ]
@@ -247,27 +253,34 @@ summary.SWISS_tournament <- function(tournament) {
     rounds$points_cum[sel] <- cumsum(games$points)
     rounds$points_diff_cum[sel] <- cumsum(games$points_diff)
 
-    for (g in 1:nrow(games)) {
+    if (nrow(games) > 0) {
+      for (g in 1:nrow(games)) {
 
-      if (g == 1) {
-        opp[[g]] <- games$opp[g]
-      } else {
-        opp[[g]] <- c(games$opp[g], opp[[g - 1]])
+        if (g == 1) {
+          opp[[g]] <- games$opp[g]
+        } else {
+          opp[[g]] <- c(games$opp[g], opp[[g - 1]])
+        }
       }
-
     }
     rounds$opp[sel] <- opp
   }
 
   # computed BHZ (reversed from program)
-  for (r in 1:nrow(rounds)) {
-    rounds$BHZ[r] <- sum(rounds$score_cum[rounds$round == rounds$round[r] & rounds$entry_id %in% rounds$opp[r][[1]]])
+  if (nrow(rounds) > 0) {
+    for (r in 1:nrow(rounds)) {
+      rounds$BHZ[r] <- sum(rounds$score_cum[rounds$round == rounds$round[r] & rounds$entry_id %in% rounds$opp[r][[1]]])
+    }
   }
 
   # apply ranking comparator
-  for (r in 1:rounds_played) {
-    sel <- rounds$round == r
-    rounds$rank[sel] <- comparator_apply(rounds[sel,])
+  if (rounds_played > 0) {
+    for (r in 1:rounds_played) {
+      sel <- rounds$round == r
+      rounds$rank[sel] <- comparator_apply(rounds[sel,])
+    }
+  } else {
+    rounds$rank <- list()
   }
 
   rounds <- rounds[order(rounds$rank),]
@@ -299,6 +312,9 @@ print.SWISS_tournament <- function(tournament, full_report = FALSE) {
 print.SWISS_tournament_summary <- function(tournament_summary, full_report = FALSE) {
   assertthat::assert_that(all(class(tournament_summary) == c("SWISS_tournament_summary", "SWISS_tournament")))
 
+  rankings.out <- tournament_summary$rankings[,c(-3,-4)]
+  rankings.out$team_name <- tournament_summary$teams$team_name[match(rankings.out$entry_id, tournament_summary$teams$entry_id)]
+
   cat("=======================================\n")
   cat(" SWISS-tournament summary\n\n")
   cat(paste(" * tournament-version: ", toString(tournament_summary$tournament_version), "\n", sep = ""))
@@ -311,5 +327,18 @@ print.SWISS_tournament_summary <- function(tournament_summary, full_report = FAL
   cat(" Participating teams\n")
   write.table(tournament_summary$teams, quote = FALSE, sep = "\t", row.names = FALSE)
   cat("\n=======================================\n")
-  cat(" Rankings\n")
+  if (nrow(rankings.out) > 0) {
+    if (full_report) {
+      for (r in tournament_summary$stats$rounds_played:1) {
+        cat("---------------------------------------\n")
+        cat(paste(" Ranking of round ", as.character(r), "\n", sep = ""))
+        write.table(rankings.out[rankings.out$round == r,c(1:2,7,3:6)], quote = FALSE, sep = "\t", row.names = FALSE)
+      }
+    } else {
+      cat(" Latest Ranking\n")
+      write.table(rankings.out[rankings.out$round == max(rankings.out$round),c(1:2,7,3:6)], quote = FALSE, sep = "\t", row.names = FALSE)
+    }
+  } else {
+    cat(" No ranking information present due to insufficient number of games\n")
+  }
 }
