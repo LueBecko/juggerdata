@@ -9,16 +9,20 @@
 \usage{
 readSwissTournament(filename)
 
-\method{summary}{SwissTournament}(tournament)
+\method{summary}{SwissTournament}(object, ...)
 
-\method{print}{SwissTournament}(tournament, fullReport = FALSE)
+\method{print}{SwissTournament}(x, fullReport = FALSE, ...)
 
-\method{print}{SwissTournamentSummary}(tournamentSummary, fullReport = FALSE)
+\method{print}{SwissTournamentSummary}(x, fullReport = FALSE, ...)
 }
 \arguments{
 \item{filename}{(character) name of the XML file returned by the program}
 
-\item{tournament}{a valid SwissTournament object}
+\item{object}{a valid SwissTournament object}
+
+\item{...}{additional possible parameters passed on to other functions (not used yet)}
+
+\item{x}{a valid SwissTournament or SwissTournamentSummary object}
 
 \item{fullReport}{(logical) print a full ranking over each round or only the latest ranking}
 }
@@ -83,6 +87,7 @@ This function reads those information into R for analysis purposes.
 \dontrun{
 # reads the tournament
 hanseaticjuggercup2012 <- readSwissTournament("HanseaticJuggerCupR6")
+
 # ad hoc information about rankings
 summary(hanseaticjuggercup2012)
 }
