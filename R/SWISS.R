@@ -154,7 +154,8 @@ readSwissTournament <- function(filename) {
 
   teams <- data.frame(entryId = 1:nTeams,
                       teamName = xml2::xml_attr( xml2::xml_children( xml2::xml_children(swiss)[3] ), "name" ),
-                      teamCity = xml2::xml_attr( xml2::xml_children( xml2::xml_children(swiss)[3] ), "city" ))
+                      teamCity = xml2::xml_attr( xml2::xml_children( xml2::xml_children(swiss)[3] ), "city" ),
+                      stringsAsFactors = FALSE)
 
   rounds <- data.frame(round = integer(),
                        game = integer(),
@@ -280,16 +281,16 @@ summary.SwissTournament <- function(object, ...) {
                              opp = rounds$entryId1) )
 
   # fill gaps for exact ranking computation
-  for (rIdx in 1:roundsScheduled) {
+  for (rIdx in as.integer(1:roundsScheduled)) {
     toAdd <- setdiff(object$teams$entryId, rounds$entryId[rounds$round == rIdx])
     if (length(toAdd) > 0) {
       rounds <- rbind(rounds, data.frame(round = rIdx,
                                          entryId = toAdd,
-                                         points = 0,
+                                         points = as.integer(0),
                                          won = FALSE,
                                          draw = FALSE,
-                                         pointsDiff = 0,
-                                         score = 0,
+                                         pointsDiff = as.integer(0),
+                                         score = as.integer(0),
                                          opp = NA))
     }
   }
@@ -344,7 +345,7 @@ summary.SwissTournament <- function(object, ...) {
   tournamentSummary <- append(object, list(rankings = rounds[,c(1,13,2,8:12)],
                                                stats = list(teamsParticipating = teamsParticipating,
                                                             roundsPlayed = roundsPlayed, roundsScheduled = roundsScheduled,
-                                                             matchesPlayed = matchesPlayed, matchesScheduled = matchesScheduled)))
+                                                            matchesPlayed = matchesPlayed, matchesScheduled = matchesScheduled)))
 
   class(tournamentSummary) <- c("SwissTournamentSummary", "SwissTournament")
   return(tournamentSummary)

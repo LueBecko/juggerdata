@@ -20,8 +20,9 @@ emptyResults <- list(tournamentVersion = as.integer(1),
                      scoreCalculation = "TwoPoints",
                      rankingComparator = "Buchholz",
                      teams = data.frame(entryId = as.integer(1:2),
-                                        teamName = as.factor(paste("T", strtoi(1:2), sep = "")),
-                                        teamCity = as.factor(paste("S", strtoi(1:2), sep = ""))),
+                                        teamName = paste("T", strtoi(1:2), sep = ""),
+                                        teamCity = paste("S", strtoi(1:2), sep = ""),
+                                        stringsAsFactors = FALSE),
                      rounds = data.frame(round = as.integer(1),
                                          game = as.integer(1),
                                          entryId1 = as.integer(1),
@@ -35,21 +36,22 @@ exampleResults  <- list(tournamentVersion = as.integer(1),
                         scoreCalculation = "TwoPoints",
                         rankingComparator = "Buchholz",
                         teams = data.frame(entryId = as.integer(1:14),
-                                           teamName = as.factor(c("MixTem",
-                                                                  "LMS",
-                                                                  "Victim",
-                                                                  "Blutgrätsche",
-                                                                  "Kmikze Eulen",
-                                                                  "leere Menge",
-                                                                  "GÄG",
-                                                                  "WoR",
-                                                                  "Bildungsurlub",
-                                                                  "Pompfenjäger",
-                                                                  "FKK",
-                                                                  "Torpedo",
-                                                                  "Keiler",
-                                                                  "Mixerei")),
-                                           teamCity = as.factor(c("","","","","","","","Rotenburg","","","","","Oldenburg",""))),
+                                           teamName = c("MixTem",
+                                                        "LMS",
+                                                        "Victim",
+                                                        "Blutgrätsche",
+                                                        "Kmikze Eulen",
+                                                        "leere Menge",
+                                                        "GÄG",
+                                                        "WoR",
+                                                        "Bildungsurlub",
+                                                        "Pompfenjäger",
+                                                        "FKK",
+                                                        "Torpedo",
+                                                        "Keiler",
+                                                        "Mixerei"),
+                                           teamCity = c("","","","","","","","Rotenburg","","","","","Oldenburg",""),
+                                           stringsAsFactors = FALSE),
                         rounds = data.frame(round = as.integer(c(rep(1, 7), rep(2, 7))),
                                             game = as.integer(c(1:7, 1:7)),
                                             entryId1  = as.integer(c(13,  2, 14,  5,  4, 10,  7,  6,  4, 12, 14, 11,  9,  1)),
@@ -63,13 +65,26 @@ class(exampleResults) <- "SwissTournament"
 test_that("checks on valid data output", {
   expect_silent(readSwissTournament(file.path("testSWISSfiles","valid1")))
   expect_s3_class(readSwissTournament(file.path("testSWISSfiles","valid1")), "SwissTournament")
+  expect_identical(lapply(readSwissTournament(file.path("testSWISSfiles","valid1")), class), list(tournamentVersion = "integer", scoreCalculation = "character", rankingComparator = "character", teams = "data.frame", rounds = "data.frame"))
+  expect_identical(lapply(readSwissTournament(file.path("testSWISSfiles","valid1"))$teams, class), list(entryId = "integer", teamName = "character", teamCity = "character"))
+  expect_identical(lapply(readSwissTournament(file.path("testSWISSfiles","valid1"))$rounds, class), list(round = "integer", game = "integer", entryId1 = "integer", entryId2 = "integer", points1 = "integer", points2 = "integer", finished = "logical"))
   expect_identical(readSwissTournament(file.path("testSWISSfiles","valid1")), emptyResults)
   expect_identical(readSwissTournament(file.path("testSWISSfiles","valid2")), exampleResults)
 })
 
-context("SWISS-tournament functions")
-#### Aux helper functions (they are only called internally so no explicit asserts of data types is performed within)
-test_that("checks correctness of the helper functions", {
+test_that("checks on correctness of data structure", {
+  tournament <- readSwissTournament(file.path("testSWISSfiles","valid2"))
+  expect_true(all(tournament$rounds$round > 0))
+  expect_true(all(tournament$rounds$game > 0))
+  expect_true(!any(duplicated(tournament$rounds[,c("round","game")])))
+  expect_true(all(tournament$rounds$entryId1 %in% tournament$teams$entryId))
+  expect_true(all(tournament$rounds$entryId2 %in% tournament$teams$entryId))
+  expect_true(all(tournament$rounds$points1 >= 0))
+  expect_true(all(tournament$rounds$points2 >= 0))
+})
+
+context("SWISS-tournament auxiliary helper functions")
+test_that("checks correctness scoring helper functions", {
   ## score functions
   expect_error(scoreInvalid(TRUE,FALSE), regexp = "Unknown scoring function. Please review your data.")
   expect_error(scoreInvalid("dog",TRUE), regexp = "is.logical(won) is not TRUE", fixed = TRUE)
@@ -91,6 +106,9 @@ test_that("checks correctness of the helper functions", {
   expect_type(scoreKO(TRUE,FALSE), "integer")
   expect_type(scoreTwoPoints(TRUE,FALSE), "integer")
   expect_type(scoreThreePoints(TRUE,FALSE), "integer")
+  # expect_type(scoreKO(rep(TRUE,10),rep(FALSE,10)), "integer")
+  # expect_type(scoreTwoPoints(rep(TRUE,10),rep(FALSE,10)), "integer")
+  # expect_type(scoreThreePoints(rep(TRUE,10),rep(FALSE,10)), "integer")
 
   expect_silent(scoreKO(TRUE,FALSE))
   expect_silent(scoreTwoPoints(TRUE,FALSE))
@@ -108,6 +126,14 @@ test_that("checks correctness of the helper functions", {
   expect_equal(scoreThreePoints(FALSE,TRUE), as.integer(1))
   expect_equal(scoreThreePoints(TRUE,FALSE), as.integer(3))
 
+  for (l in c(1,2,5,10,100)) {
+    expect_length(scoreKO(rep(FALSE,l),rep(FALSE,l)), l)
+    expect_length(scoreTwoPoints(rep(FALSE,l),rep(FALSE,l)), l)
+    expect_length(scoreThreePoints(rep(FALSE,l),rep(FALSE,l)), l)
+  }
+})
+
+test_that("checks correctness comparator helper functions", {
   ## comparator functions
   expect_error(comparatorInvalid(TRUE))
   expect_error(comparatorInvalid(data.frame()))
@@ -121,7 +147,21 @@ test_that("checks correctness of the helper functions", {
   expect_error(comparatorBuchholzzahl(data.frame(entryId = 1:14, scoreCum = 'ui')))
   expect_silent(comparatorBuchholzzahl(data.frame(entryId = 1:14, scoreCum = 2:15, BHZ = 3:16, pointsDiffCum = 4:17, pointsCum = 5:18)))
   expect_type(comparatorBuchholzzahl(data.frame(entryId = 1:14, scoreCum = 2:15, BHZ = 3:16, pointsDiffCum = 4:17, pointsCum = 5:18)), "integer")
-  expect_length(comparatorBuchholzzahl(data.frame(entryId = 1:14, scoreCum = 2:15, BHZ = 3:16, pointsDiffCum = 4:17, pointsCum = 5:18)), 14)
-  expect_identical(comparatorBuchholzzahl(data.frame(entryId = 1:14, scoreCum = 2:15, BHZ = 3:16, pointsDiffCum = 4:17, pointsCum = 5:18)), 14:1)
+  for (l in as.integer(c(1,2,5,10,100))) {
+    expect_length(comparatorBuchholzzahl(data.frame(entryId = as.integer(1:l), scoreCum = as.integer(1 + (1:l)), BHZ = as.integer(1 + (1:l)), pointsDiffCum = as.integer(3 + (1:l)), pointsCum = as.integer(4 + (1:l)))), l)
+    expect_identical(comparatorBuchholzzahl(data.frame(entryId = as.integer(1:l), scoreCum = as.integer(1 + (1:l)), BHZ = as.integer(1 + (1:l)), pointsDiffCum = as.integer(3 + (1:l)), pointsCum = as.integer(4 + (1:l)))), l:1)
+  }
 })
 
+###########
+context("SWISS-tournament analysis functions")
+test_that("checks correctness of the analysis and print functions", {
+  expect_output(print.SwissTournament(exampleResults))
+  expect_silent(summary.SwissTournament(exampleResults))
+  expect_output(print.SwissTournamentSummary(summary(exampleResults)))
+  expect_s3_class(summary(exampleResults), c("SwissTournament", "SwissTournamentSummary"))
+
+  expect_identical(lapply(summary(exampleResults), class), list(tournamentVersion = "integer", scoreCalculation = "character", rankingComparator = "character", teams = "data.frame", rounds = "data.frame", rankings = "data.frame", stats = "list"))
+  expect_identical(lapply(summary(exampleResults)$rankings, class), list(round = "integer", rank = "integer", entryId = "integer", opp = "list", scoreCum = "integer", pointsCum = "integer", pointsDiffCum = "integer", BHZ = "integer"))
+  expect_identical(lapply(summary(exampleResults)$stats, class), list(teamsParticipating = "integer", roundsPlayed = "integer", roundsScheduled = "integer", matchesPlayed = "integer", matchesScheduled = "integer"))
+})
