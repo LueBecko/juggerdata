@@ -153,7 +153,7 @@ test_that("checks correctness comparator helper functions", {
   }
 })
 
-###########
+############
 context("SWISS-tournament analysis functions")
 test_that("checks correctness of the analysis and print functions", {
   expect_output(print.SwissTournament(exampleResults))
