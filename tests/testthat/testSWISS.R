@@ -161,7 +161,16 @@ test_that("checks correctness of the analysis and print functions", {
   expect_output(print.SwissTournamentSummary(summary(exampleResults)))
   expect_s3_class(summary(exampleResults), c("SwissTournament", "SwissTournamentSummary"))
 
-  expect_identical(lapply(summary(exampleResults), class), list(tournamentVersion = "integer", scoreCalculation = "character", rankingComparator = "character", teams = "data.frame", rounds = "data.frame", rankings = "data.frame", stats = "list"))
-  expect_identical(lapply(summary(exampleResults)$rankings, class), list(round = "integer", rank = "integer", entryId = "integer", opp = "list", scoreCum = "integer", pointsCum = "integer", pointsDiffCum = "integer", BHZ = "integer"))
-  expect_identical(lapply(summary(exampleResults)$stats, class), list(teamsParticipating = "integer", roundsPlayed = "integer", roundsScheduled = "integer", matchesPlayed = "integer", matchesScheduled = "integer"))
+  tournamentsummary <- summary(exampleResults)
+  expect_identical(lapply(tournamentsummary, class), list(tournamentVersion = "integer", scoreCalculation = "character", rankingComparator = "character", teams = "data.frame", rounds = "data.frame", rankings = "data.frame", stats = "list"))
+  expect_identical(lapply(tournamentsummary$rankings, class), list(round = "integer", rank = "integer", entryId = "integer", opp = "list", scoreCum = "integer", pointsCum = "integer", pointsDiffCum = "integer", BHZ = "integer"))
+  expect_identical(lapply(tournamentsummary$stats, class), list(teamsParticipating = "integer", roundsPlayed = "integer", roundsScheduled = "integer", matchesPlayed = "integer", matchesScheduled = "integer"))
+
+  expect_true(nrow(tournamentsummary$teams) == tournamentsummary$stats$teamsParticipating)
+
+  expect_true(all(tournamentsummary$rankings$round %in% 1:tournamentsummary$stats$roundsScheduled))
+  expect_true(all(tournamentsummary$rankings$rank %in% 0:tournamentsummary$stats$teamsParticipating))
+  expect_true(all(tournamentsummary$rankings$entryId %in% tournamentsummary$teams$entryId))
+  expect_true(all(unlist(tournamentsummary$rankings$opp) %in% tournamentsummary$teams$entryId))
+
 })
