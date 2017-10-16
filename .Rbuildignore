@@ -6,3 +6,4 @@ README.md
 ^README-.*\.png$
 ^docs$
 ^\.travis\.yml$
+^codecov\.yml$

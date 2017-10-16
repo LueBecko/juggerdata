@@ -1,17 +1,24 @@
 Package: juggerdata
 Type: Package
-Title: A package containing all the datasets from the juggerdata project for reuseability
-Version: 1.0.1
+Title: A package containing all the datasets from the juggerdata project for reuseability and a number of helpful functions
+Version: 1.1.0
 Authors@R: person(c("Christian", "(Becko)"), "Beck", email = "luebeckogm@gmail.com", role = c("aut", "cre"))
-Description: Jugger related data sets - as discussed on my blog jugger-data (https://juggerdata.blogspot.de/).
+Description: Jugger related data sets and analysis functionality - as discussed on my blog jugger-data (https://juggerdata.blogspot.de/).
     This package is intended to be used as a central repository, such that everybody can start doing analysis without much prior work.
     Data currently maintained by the package: jtr (data from the JTR platform (http://turniere.jugger.org/); Tournaments, Teams, Results from 2009 till 2017).
-License: CC0
+    This package also contains a number of functions for reading and analysing data from the old swiss tournament software.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends: R (>= 2.10)
 Imports: xml2, testthat, assertthat, utils
-Suggests: dplyr, readr, XML, RJSONIO, knitr
+Suggests: 
+    dplyr,
+    readr,
+    XML,
+    RJSONIO,
+    knitr,
+    covr
 URL: https://juggerdata.blogspot.de/
 BugReports: https://github.com/LueBecko/juggerdata/issues
 RoxygenNote: 6.0.1

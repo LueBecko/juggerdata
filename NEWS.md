@@ -1,5 +1,6 @@
-# juggerdata 1.1.0 (in preparation)
+# juggerdata 1.1.0
 * adding SWISS torunament support
+* change in licensing: the package is now licensed under the MIT license.
 
 # juggerdata 1.0.1
 
