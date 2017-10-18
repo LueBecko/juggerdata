@@ -225,8 +225,8 @@ comparatorBuchholzzahl <- function(games) {
 
 comparatorInvalid <- function(games) {
   assertthat::assert_that(is.data.frame(games), nrow(games) > 0,
-                          all( colnames(games) %in% c("scoreCum", "BHZ", "pointsDiffCum", "pointsCum") ),
-                          all.equal( sapply(games, class), c("integer", "integer", "integer", "integer") ))
+                          all( c("scoreCum", "BHZ", "pointsDiffCum", "pointsCum") %in% colnames(games) ),
+                          all( sapply(games[,c("scoreCum", "BHZ", "pointsDiffCum", "pointsCum")], class) ==  c("integer", "integer", "integer", "integer") ))
   stop("Unknown ranking comparator. Please review your data.")
 }
 
@@ -377,7 +377,7 @@ print.SwissTournamentSummary <- function(x, fullReport = FALSE, ...) {
   cat(" Participating teams\n")
   utils::write.table(x$teams, quote = FALSE, sep = "\t", row.names = FALSE)
   cat("\n=======================================\n")
-  if (nrow(rankingsOut) > 0) {
+  # if (nrow(rankingsOut) > 0) {
     if (fullReport) {
       for (rIdx in x$stats$roundsScheduled:1) {
         cat("---------------------------------------\n")
@@ -388,7 +388,7 @@ print.SwissTournamentSummary <- function(x, fullReport = FALSE, ...) {
       cat(" Latest Ranking\n")
       utils::write.table(rankingsOut[rankingsOut$round == max(rankingsOut$round), c(1:3,8,4:7)], quote = FALSE, sep = "\t", row.names = FALSE)
     }
-  } else {
-    cat(" No ranking information present due to insufficient number of games\n")
-  }
+  # } else {
+  #   cat(" No ranking information present due to insufficient number of games\n")
+  # }
 }

@@ -61,6 +61,22 @@ exampleResults  <- list(tournamentVersion = as.integer(1),
                                             finished  = rep(TRUE, 14)))
 class(exampleResults) <- "SwissTournament"
 
+partialResults <- list(tournamentVersion = as.integer(1),
+                       scoreCalculation = "TwoPoints",
+                       rankingComparator = "Buchholz",
+                       teams = data.frame(entryId = as.integer(1:4),
+                                          teamName = paste("T", strtoi(1:4), sep = ""),
+                                          teamCity = paste("S", strtoi(1:4), sep = ""),
+                                          stringsAsFactors = FALSE),
+                       rounds = data.frame(round = as.integer(1),
+                                           game = as.integer(1:2),
+                                           entryId1 = as.integer(c(1,3)),
+                                           entryId2 = as.integer(c(2,4)),
+                                           points1 = as.integer(1),
+                                           points2 = as.integer(0),
+                                           finished = c(TRUE, FALSE)))
+class(partialResults) <- "SwissTournament"
+
 # using stubs to check correct output
 test_that("checks on valid data output", {
   expect_silent(readSwissTournament(file.path("testSWISSfiles","valid1")))
@@ -70,10 +86,20 @@ test_that("checks on valid data output", {
   expect_identical(lapply(readSwissTournament(file.path("testSWISSfiles","valid1"))$rounds, class), list(round = "integer", game = "integer", entryId1 = "integer", entryId2 = "integer", points1 = "integer", points2 = "integer", finished = "logical"))
   expect_identical(readSwissTournament(file.path("testSWISSfiles","valid1")), emptyResults)
   expect_identical(readSwissTournament(file.path("testSWISSfiles","valid2")), exampleResults)
+  expect_identical(readSwissTournament(file.path("testSWISSfiles","valid3")), partialResults)
 })
 
 test_that("checks on correctness of data structure", {
   tournament <- readSwissTournament(file.path("testSWISSfiles","valid2"))
+  expect_true(all(tournament$rounds$round > 0))
+  expect_true(all(tournament$rounds$game > 0))
+  expect_true(!any(duplicated(tournament$rounds[,c("round","game")])))
+  expect_true(all(tournament$rounds$entryId1 %in% tournament$teams$entryId))
+  expect_true(all(tournament$rounds$entryId2 %in% tournament$teams$entryId))
+  expect_true(all(tournament$rounds$points1 >= 0))
+  expect_true(all(tournament$rounds$points2 >= 0))
+
+  tournament <- readSwissTournament(file.path("testSWISSfiles","valid3"))
   expect_true(all(tournament$rounds$round > 0))
   expect_true(all(tournament$rounds$game > 0))
   expect_true(!any(duplicated(tournament$rounds[,c("round","game")])))
@@ -135,15 +161,15 @@ test_that("checks correctness scoring helper functions", {
 
 test_that("checks correctness comparator helper functions", {
   ## comparator functions
-  expect_error(comparatorInvalid(TRUE))
-  expect_error(comparatorInvalid(data.frame()))
-  expect_error(comparatorInvalid(data.frame(entryId = 1:14)))
-  expect_error(comparatorInvalid(data.frame(entryId = 1:14, scoreCum = 'ui')))
-  expect_error(comparatorInvalid(data.frame(entryId = 1:14, scoreCum = 2:15, BHZ = 3:16, pointsDiffCum = 4:17, pointsCum = 5:18)))
+  expect_error(comparatorInvalid(TRUE), regexp = "games is not a data frame")
+  expect_error(comparatorInvalid(data.frame()), regexp = "nrow(games) not greater than 0", fixed = TRUE)
+  expect_error(comparatorInvalid(data.frame(entryId = 1:14)), regexp = 'Elements 1, 2, 3, 4 of c("scoreCum", "BHZ", "pointsDiffCum", "pointsCum") %in% colnames(games) are not true', fixed = TRUE)
+  expect_error(comparatorInvalid(data.frame(entryId = 1:14, scoreCum = 'ui', BHZ = 'ui', pointsDiffCum = 'ui', pointsCum = 'ui'))) #, regexp = "")
+  expect_error(comparatorInvalid(data.frame(entryId = 1:14, scoreCum = 2:15, BHZ = 3:16, pointsDiffCum = 4:17, pointsCum = 5:18)), regexp = "Unknown ranking comparator. Please review your data.")
 
-  expect_error(comparatorBuchholzzahl(TRUE))
-  expect_error(comparatorBuchholzzahl(data.frame()))
-  expect_error(comparatorBuchholzzahl(data.frame(entryId = 1:14)))
+  expect_error(comparatorBuchholzzahl(TRUE), regexp = "games is not a data frame")
+  expect_error(comparatorBuchholzzahl(data.frame()), regexp = "nrow(games) not greater than 0", fixed = TRUE)
+  expect_error(comparatorBuchholzzahl(data.frame(entryId = 1:14)), regexp = 'Elements 1, 2, 3, 4 of c("scoreCum", "BHZ", "pointsDiffCum", "pointsCum") %in% colnames(games) are not true', fixed = TRUE)
   expect_error(comparatorBuchholzzahl(data.frame(entryId = 1:14, scoreCum = 'ui')))
   expect_silent(comparatorBuchholzzahl(data.frame(entryId = 1:14, scoreCum = 2:15, BHZ = 3:16, pointsDiffCum = 4:17, pointsCum = 5:18)))
   expect_type(comparatorBuchholzzahl(data.frame(entryId = 1:14, scoreCum = 2:15, BHZ = 3:16, pointsDiffCum = 4:17, pointsCum = 5:18)), "integer")
@@ -157,8 +183,11 @@ test_that("checks correctness comparator helper functions", {
 context("SWISS-tournament analysis functions")
 test_that("checks correctness of the analysis and print functions", {
   expect_output(print.SwissTournament(exampleResults))
+  expect_output(print.SwissTournament(emptyResults))
   expect_silent(summary.SwissTournament(exampleResults))
+  expect_silent(summary.SwissTournament(emptyResults))
   expect_output(print.SwissTournamentSummary(summary(exampleResults)))
+  expect_output(print.SwissTournamentSummary(summary(emptyResults)))
   expect_s3_class(summary(exampleResults), c("SwissTournament", "SwissTournamentSummary"))
 
   tournamentsummary <- summary(exampleResults)
@@ -171,6 +200,31 @@ test_that("checks correctness of the analysis and print functions", {
   expect_true(all(tournamentsummary$rankings$round %in% 1:tournamentsummary$stats$roundsScheduled))
   expect_true(all(tournamentsummary$rankings$rank %in% 0:tournamentsummary$stats$teamsParticipating))
   expect_true(all(tournamentsummary$rankings$entryId %in% tournamentsummary$teams$entryId))
-  expect_true(all(unlist(tournamentsummary$rankings$opp) %in% tournamentsummary$teams$entryId))
+  expect_true(all(unlist(tournamentsummary$rankings$opp) %in% c(NA, tournamentsummary$teams$entryId))) # NA if no game was played
 
+  ##
+  tournamentsummary <- summary(emptyResults)
+  expect_identical(lapply(tournamentsummary, class), list(tournamentVersion = "integer", scoreCalculation = "character", rankingComparator = "character", teams = "data.frame", rounds = "data.frame", rankings = "data.frame", stats = "list"))
+  expect_identical(lapply(tournamentsummary$rankings, class), list(round = "integer", rank = "integer", entryId = "integer", opp = "list", scoreCum = "integer", pointsCum = "integer", pointsDiffCum = "integer", BHZ = "integer"))
+  expect_identical(lapply(tournamentsummary$stats, class), list(teamsParticipating = "integer", roundsPlayed = "integer", roundsScheduled = "integer", matchesPlayed = "integer", matchesScheduled = "integer"))
+
+  expect_true(nrow(tournamentsummary$teams) == tournamentsummary$stats$teamsParticipating)
+
+  expect_true(all(tournamentsummary$rankings$round %in% 1:tournamentsummary$stats$roundsScheduled))
+  expect_true(all(tournamentsummary$rankings$rank %in% 0:tournamentsummary$stats$teamsParticipating))
+  expect_true(all(tournamentsummary$rankings$entryId %in% tournamentsummary$teams$entryId))
+  expect_true(all(unlist(tournamentsummary$rankings$opp) %in% c(NA, tournamentsummary$teams$entryId))) # NA if no game was played
+
+  ##
+  tournamentsummary <- summary(partialResults)
+  expect_identical(lapply(tournamentsummary, class), list(tournamentVersion = "integer", scoreCalculation = "character", rankingComparator = "character", teams = "data.frame", rounds = "data.frame", rankings = "data.frame", stats = "list"))
+  expect_identical(lapply(tournamentsummary$rankings, class), list(round = "integer", rank = "integer", entryId = "integer", opp = "list", scoreCum = "integer", pointsCum = "integer", pointsDiffCum = "integer", BHZ = "integer"))
+  expect_identical(lapply(tournamentsummary$stats, class), list(teamsParticipating = "integer", roundsPlayed = "integer", roundsScheduled = "integer", matchesPlayed = "integer", matchesScheduled = "integer"))
+
+  expect_true(nrow(tournamentsummary$teams) == tournamentsummary$stats$teamsParticipating)
+
+  expect_true(all(tournamentsummary$rankings$round %in% 1:tournamentsummary$stats$roundsScheduled))
+  expect_true(all(tournamentsummary$rankings$rank %in% 0:tournamentsummary$stats$teamsParticipating))
+  expect_true(all(tournamentsummary$rankings$entryId %in% tournamentsummary$teams$entryId))
+  expect_true(all(unlist(tournamentsummary$rankings$opp) %in% c(NA, tournamentsummary$teams$entryId))) # NA if no game was played
 })
