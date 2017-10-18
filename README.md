@@ -53,3 +53,12 @@ min(JTR.Tournaments$TournamentStart)
 ```
 
 Datasets are loaded into your workspace when you first invoke them.
+
+Functions
+---------
+
+This packages also delivers a number of function for dealing with various Jugger and data related tasks.
+
+-   `readSwissTournament`: a function to read result files from a software that was used to manage jugger tournaments with a swiss system (it actually contains also a powerful summary function and two S3 classes that allow accessing all results and rankings of such an tournament)
+
+More functionality is sure to come.
