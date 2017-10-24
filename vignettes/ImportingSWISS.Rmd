@@ -27,7 +27,7 @@ The function `readSwissTournament` and accompanying `summary` and `print` functi
 library(juggerdata)
 
 # note: the data-file can be named arbitrarily, since the program does not enforce any file endings
-HanseaticJuggerCup2013 <- readSwissTournament("Hanseatic Jugger Cup R6") # R6 stands for round 6
+HanseaticJuggerCup2013 <- readSwissTournament("HanseaticJuggerCupR6") # R6 stands for round 6
 
 summary(HanseaticJuggerCup2013)
 
