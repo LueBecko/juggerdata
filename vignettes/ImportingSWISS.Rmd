@@ -1,0 +1,89 @@
+---
+title: "Importing and cleaning a swiss tournament dataset"
+author: "Christian \"Becko\" Beck"
+date: "23 Oktober 2017"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Importing and cleaning a swiss tournament dataset}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+Starting with the release of the packages version 1.1. it comes bundled with a set of functions for reading and including data sets from the nearly ancient software - written by Bunny in 2008 and used in a handful of tournaments. While the Swiss tournament system never gained a high popularity among jugger players and organizers it is sound and safe to apply for a tournament - the resulting rankings are valid, the matchmaking is plausible - until a certain degree of convergence is reached - and the software makes the math behind it manageable.
+
+This vignette highlights the process of reading a tournament file produced by the program and transforming it into the packages result format. The sample tournament data was generated in a real tournament - the first Hanseatic Jugger Cup in 2013. In this tournament 14 teams - one of the as a mix-team which is omitted in the final published ranking - played six full rounds of the Swiss system, seven games per round, on three fields. Afterwards the top 4 teams played a fully balanced ranking tree for the top 4 places ending in a big finale between `GAG` and `Die leere Menge`. The final ranking of all participating teams can be found in the JTR (LINK) or within this package.
+
+## Reading tournament data
+
+The function `readSwissTournament` and accompanying `summary` and `print` functions come with the package `juggerdata`.
+
+```{r read}
+library(juggerdata)
+
+# note: the data-file can be named arbitrarily, since the program does not enforce any file endings
+HanseaticJuggerCup2013 <- readSwissTournament("Hanseatic Jugger Cup R6") # R6 stands for round 6
+
+summary(HanseaticJuggerCup2013)
+
+```
+
+If you read the above team names you might wonder if there is an error in the reader, but this is actually the content of the file. Back in 2013 the teams were entered into the tournament software a day before. But due to some forgotten reasons the first carefully and correctly written file was lost and so the operator of the software (if you wonder: it was me.) had to retype and setup everything within a few minutes before the first games started and thus in a wild typing frenzy teams like `GÄG` and `Kmikze Eulen` were born. For historical accuracy those names are documented here, but in the process of preparing this data set will be replaced by the correct names.
+
+## Visualising rankings
+
+The above functions also compute all intermediate rankings, which can be visualised with some `ggplot`-magic.
+
+```{r draw rankings}
+library(tidyverse)
+library(directlabels)
+
+HanseaticJuggerCup2013Summary <- summary(HanseaticJuggerCup2013)
+
+ggplot(HanseaticJuggerCup2013Summary$rankings %>%
+         left_join(HanseaticJuggerCup2013Summary$teams, by = "entryId"),
+       aes(x = round, y = rank, color = teamName, group = teamName)) +
+  geom_line() +
+  geom_dl(aes(label = teamName), method = list(dl.combine("first.points", "last.points"), cex = 0.8)) +
+  scale_x_continuous("Swiss tournament rounds", breaks = 1:6, minor_breaks = NULL, labels = paste('R', 1:6, sep = ''), limits = c(0,7)) +
+  scale_y_continuous("Swiss rank", breaks = 1:14, minor_breaks = NULL, trans = "reverse", position = "right") +
+  scale_color_discrete(h = c(0,240), l = 50, guide = FALSE) +
+  ggtitle("1. Hanseatic Jugger Cup, 2013", "rankings over all swiss system rounds") +
+  theme_minimal() + theme(panel.grid.major.y = element_blank(),
+                          plot.title = element_text(hjust = 0.3),
+                          plot.subtitle = element_text(hjust = 0.3))
+
+```
+
+From the above visualisation one might get the intuition that changes in the ranking are bigger in the beginning than in the end - or in other words that the ranking converges towards a finale stable ranking of teams. Lets visualise that.
+
+```{r draw ranking changes}
+ggplot(HanseaticJuggerCup2013Summary$rankings %>%
+         group_by(entryId) %>%
+         arrange(round) %>%
+         mutate(round = as.factor(round),
+                'total rank changes' = lag(rank, 1) - rank,
+                'absolut rank changes' = abs(lag(rank, 1) - rank)) %>%
+         filter(round != 1) %>% select(-rank, -opp, -scoreCum, -pointsCum, -pointsDiffCum, -BHZ) %>%
+         gather("rankChangeTyp", "Value", -entryId, -round),
+       aes(x = round, y = Value, color = as.factor(1), fill = as.factor(1))) +
+  facet_wrap(~rankChangeTyp, scales = "free", ncol = 1) +
+  geom_boxplot() +
+  scale_x_discrete("Swiss tournament rounds transition", labels = paste('R', 1:5, '-R', 2:6, sep = '')) +
+  scale_y_continuous("Swiss rank change", breaks = -5:5, minor_breaks = NULL, position = "left") +
+  scale_color_discrete(h = c(100,140), l = 50, guide = FALSE) +
+  scale_fill_discrete(h = c(100,140), l = 75, c = 100, guide = FALSE) +
+  ggtitle("1. Hanseatic Jugger Cup, 2013", "rank changes swiss system rounds") +
+  theme_minimal() + theme(panel.grid.major.y = element_blank(),
+                          plot.title = element_text(hjust = 0.3),
+                          plot.subtitle = element_text(hjust = 0.3))
+
+
+
+```
+

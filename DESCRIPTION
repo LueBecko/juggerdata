@@ -18,7 +18,10 @@ Suggests:
     XML,
     RJSONIO,
     knitr,
+    rmarkdown,
+    tidyverse,
     covr
+VignetteBuilder: knitr
 URL: https://juggerdata.blogspot.de/
 BugReports: https://github.com/LueBecko/juggerdata/issues
 RoxygenNote: 6.0.1
