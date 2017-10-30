@@ -37,7 +37,7 @@ If you read the above team names you might wonder if there is an error in the re
 
 ## Visualising rankings
 
-The above functions also compute all intermediate rankings, which can be visualised with some `ggplot`-magic.
+The above functions also compute all intermediate rankings, which can be visualized with some `ggplot`-magic.
 
 ```{r draw rankings}
 library(tidyverse)
@@ -60,17 +60,19 @@ ggplot(HanseaticJuggerCup2013Summary$rankings %>%
 
 ```
 
-From the above visualisation one might get the intuition that changes in the ranking are bigger in the beginning than in the end - or in other words that the ranking converges towards a finale stable ranking of teams. Lets visualise those changes.
+From the above visualization one might get the intuition that changes in the ranking are bigger in the beginning than in the end - or in other words that the ranking converges towards a finale stable ranking of teams. And this is actually the prime motivation to employ a Swiss system for your tournament - getting a stable and plausible ranking after a considerable amount of rounds/games. So lets visualize those changes.
 
 ```{r draw ranking changes}
-ggplot(HanseaticJuggerCup2013Summary$rankings %>%
-         group_by(entryId) %>%
-         arrange(round) %>%
-         mutate(round = as.factor(round),
-                'total rank changes' = lag(rank, 1) - rank,
-                'absolut rank changes' = abs(lag(rank, 1) - rank)) %>%
-         filter(round != 1) %>% select(-rank, -opp, -scoreCum, -pointsCum, -pointsDiffCum, -BHZ) %>%
-         gather("rankChangeTyp", "Value", -entryId, -round),
+changeData <- HanseaticJuggerCup2013Summary$rankings %>% 
+  group_by(entryId) %>%
+  arrange(round) %>%
+  mutate(round = as.factor(round),
+        'total rank changes' = lag(rank, 1) - rank,
+        'absolute rank changes' = abs(lag(rank, 1) - rank)) %>%
+  filter(round != 1) %>% select(-rank, -opp, -scoreCum, -pointsCum, -pointsDiffCum, -BHZ) %>%
+  gather("rankChangeTyp", "Value", -entryId, -round)
+
+ggplot(changeData,
        aes(x = round, y = Value, color = as.factor(1), fill = as.factor(1))) +
   facet_wrap(~rankChangeTyp, scales = "free", ncol = 1) +
   geom_boxplot() +
@@ -83,7 +85,76 @@ ggplot(HanseaticJuggerCup2013Summary$rankings %>%
                           plot.title = element_text(hjust = 0.3),
                           plot.subtitle = element_text(hjust = 0.3))
 
+```
 
+This looks like the intuition holds... But it would be wrong to not do some thorough testing. The hypotheses tested are a) absolute rank changes decreases with increasing rounds and b) the variance of total rank changes decreases with increasing rounds.
+
+```{r testing swiss A, warning=FALSE}
+testData <- changeData %>% ungroup() %>% filter(rankChangeTyp == "absolute rank changes") %>% select(entryId, round, Value) %>%
+  spread(round, Value) %>% select(-entryId)
+
+indices <- expand.grid(round1 = 1:ncol(testData), round2 = 1:ncol(testData))
+testResultsA <- cbind(indices,
+                      t(mapply(function(i1,i2) { broom::tidy(wilcox.test(x = as.numeric(testData[[i1]]),
+                                                                         y = as.numeric(testData[[i2]]),
+                                                                         alternative = "less")) }, indices[[1]], indices[[2]])[1:2,]))
+testResultsA <- testResultsA %>% mutate(statistic = unlist(statistic), p.value = unlist(p.value))
+# knitr::kable(testResultsA)
+ggplot(testResultsA %>% mutate(sigLabel = if_else(p.value < 0.05, '*', '')),
+       aes(x = as.factor(round1), y = as.factor(round2), fill = p.value, label = sigLabel)) +
+  geom_raster() + geom_text() +
+  scale_x_discrete("round transition", labels = paste('R', 1:5, '-R', 2:6, sep = '')) +
+  scale_y_discrete("round transition", labels = paste('R', 1:5, '-R', 2:6, sep = '')) +
+  scale_fill_continuous(name = "p") +
+  ggtitle("1. Hanseastic Jugger Cup, 2013", "wilcoxon test results (one-sided)") +
+  theme_minimal() + theme(panel.grid.major.y = element_blank(), panel.grid.major.x = element_blank(),
+                          plot.title = element_text(hjust = 0.3),
+                          plot.subtitle = element_text(hjust = 0.3))
+```
+
+The above table and graph highlight that later round are indeed significantly more likely to experience smaller absolute changes than the earlier rounds. So hypothesis A seems to be true. Interestingly there seems to be a switch in the last round - a not significant increase in absolute changes. This could be read as a sign that convergence was reached, but more on that later.
+
+Now to the second hypotheses: Variance decreases from round to round.
+
+And here we are in a little statistical connundrum. Usually to test if two distirbitions are different base dont heir variance one would use a F-test (or in R `var.test`). But This is only applicable on normal data, which this data is not. The natural followup-test ist the `leveneTest` from the package `car`.
+
+```{r swiss test B}
+testData <- changeData %>% ungroup() %>% filter(rankChangeTyp == "total rank changes") %>% select(round, Value)
+
+indices <- expand.grid(round1 = unique(testData$round), round2 = unique(testData$round))
+testResultsB <- cbind(indices,
+                      t(mapply(function(i1,i2) { if (i1 == i2) return(data_frame(statistic = NA, p.value = NA, variance = var(testData %>% filter(round == i1))[2,2])) else cbind(broom::tidy(car::leveneTest(Value ~ round, testData %>% filter(round %in% c(i1,i2))))[1,3:4], variance = NA) }, indices[[1]], indices[[2]])))
+testResultsB <- testResultsB %>% mutate(statistic = unlist(statistic), p.value = unlist(p.value), variance = unlist(variance))
+
+ggplot(testResultsB %>% mutate(varianceLabel = if_else(is.na(variance), if_else(p.value < 0.05, '*', ''), paste("var = ", format(variance, digits = 3)) )),
+       aes(x = as.factor(round1), y = as.factor(round2), fill = p.value, label = varianceLabel)) +
+  geom_raster() + geom_text() +
+  scale_x_discrete("round transition", labels = paste('R', 1:5, '-R', 2:6, sep = '')) +
+  scale_y_discrete("round transition", labels = paste('R', 1:5, '-R', 2:6, sep = '')) +
+  scale_fill_continuous(name = "p", na.value = "white") +
+  ggtitle("1. Hanseastic Jugger Cup, 2013", "Levene test results") +
+  theme_minimal() + theme(panel.grid.major.y = element_blank(), panel.grid.major.x = element_blank(),
+                          plot.title = element_text(hjust = 0.3),
+                          plot.subtitle = element_text(hjust = 0.3))
+
+```
+
+The numbers in the diagonal are the variances and it is clear that they are monotonically decreasing over all rounds. Further the p-values of the levene tests indicate that changes in the last three rounds significantly differ from the changes between the first two rounds - with Bonferroni correction for multiple comparison only `R1-R2` to `R4-R5` remains (F = 8.275, p = 0.008). Given the small number of rounds and games per round this result is only a weak support for the second hypothesis.
+
+## Stability of rankings
+
+If we accept that the above two hypotheses hold and that enough rounds are played we would see stable rankings of all participating teams. Kendalls's tau is a prime indicator of similarity between rank lists, so lets look at a tau-map of the rankings of this single tournament.
+
+```{r ranking stability}
+
+```
+
+
+## Preparing the data for `juggerdata`
+
+The aim of the package `juggerdata` is to share such jugger game data as above. This data can easily be included in the package if processed the right way - as will be highlighted in this section.
+
+```{r prepare package data}
 
 ```
 
