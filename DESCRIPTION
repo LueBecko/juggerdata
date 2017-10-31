@@ -21,6 +21,8 @@ Suggests:
     rmarkdown,
     tidyverse,
     directlabels,
+    car,
+    broom,
     covr
 VignetteBuilder: knitr
 URL: https://juggerdata.blogspot.de/

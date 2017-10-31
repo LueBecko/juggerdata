@@ -4,13 +4,14 @@ author: "Christian \"Becko\" Beck"
 date: "23 Oktober 2017"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Importing and cleaning a swiss tournament dataset}
+  %\VignetteIndexEntry{Importing, analysing and cleaning a swiss tournament dataset}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(fig.width=7, fig.height=6, fig.align = "center")
 ```
 
 ## Introduction
@@ -24,6 +25,7 @@ This vignette highlights the process of reading a tournament file produced by th
 The function `readSwissTournament` and accompanying `summary` and `print` functions come with the package `juggerdata`.
 
 ```{r read}
+library(tidyverse)
 library(juggerdata)
 
 # note: the data-file can be named arbitrarily, since the program does not enforce any file endings
@@ -31,16 +33,31 @@ HanseaticJuggerCup2013 <- readSwissTournament("HanseaticJuggerCupR6") # R6 stand
 
 summary(HanseaticJuggerCup2013)
 
+
+ggplot(HanseaticJuggerCup2013$rounds %>%
+         union_all(HanseaticJuggerCup2013$rounds %>%
+                     rename(entryId1 = entryId2, entryId2 = entryId1, points1 = points2, points2 = points1)) %>%
+         mutate(status = factor(x = sign(points2 - points1), labels = c("Team1", "Draw", "Team2"))),
+       aes(x = entryId1, y = entryId2, fill = status)) +
+  geom_raster() +
+  scale_x_continuous("Team1", breaks = HanseaticJuggerCup2013$teams$entryId, minor_breaks = NULL, labels = HanseaticJuggerCup2013$teams$teamName) + #, limits = c(1,nrow(HanseaticJuggerCup2013$teams))
+  scale_y_continuous("Team2", breaks = HanseaticJuggerCup2013$teams$entryId, minor_breaks = NULL, labels = HanseaticJuggerCup2013$teams$teamName) + #, limits = c(1,nrow(HanseaticJuggerCup2013$teams))
+  scale_fill_discrete("Winner", h = c(40,200), l = 50) +
+  ggtitle("1. Hanseatic Jugger Cup, 2013", "games played and won") +
+  theme_minimal() + theme(plot.title = element_text(hjust = 0.3),
+                          plot.subtitle = element_text(hjust = 0.3),
+                          axis.text.x = element_text(angle = -90, vjust = 0.5))
 ```
 
 If you read the above team names you might wonder if there is an error in the reader, but this is actually the content of the file. Back in 2013 the teams were entered into the tournament software a day before. But due to some forgotten reasons the first carefully and correctly written file was lost and so the operator of the software (if you wonder: it was me.) had to retype and setup everything within a few minutes before the first games started and thus in a wild typing frenzy teams like `GÄG` and `Kmikze Eulen` were born. For historical accuracy those names are documented here, but in the process of preparing this data set will be replaced by the correct names.
+
+As can be seen in the visualized game matrix above a lot of various games where played within the tournament - 6 rounds for 14 teams is only 7 open games left for each team. This could be enough to generate a reasonable ranking, since some clear structures are visible within the data - e.g. `GAG` and `Die Leere Menge` won every game except when they played each other. Let's see about that.
 
 ## Visualising rankings
 
 The above functions also compute all intermediate rankings, which can be visualized with some `ggplot`-magic.
 
 ```{r draw rankings}
-library(tidyverse)
 library(directlabels)
 
 HanseaticJuggerCup2013Summary <- summary(HanseaticJuggerCup2013)
@@ -116,7 +133,7 @@ The above table and graph highlight that later round are indeed significantly mo
 
 Now to the second hypotheses: Variance decreases from round to round.
 
-And here we are in a little statistical connundrum. Usually to test if two distirbitions are different base dont heir variance one would use a F-test (or in R `var.test`). But This is only applicable on normal data, which this data is not. The natural followup-test ist the `leveneTest` from the package `car`.
+Usually to test if two distributions are different based don't heir variance one would use a F-test (or in R `var.test`). But This is only applicable on normal data, which this data is not. The natural test for situations like this is the `leveneTest` from the package `car`.
 
 ```{r swiss test B}
 testData <- changeData %>% ungroup() %>% filter(rankChangeTyp == "total rank changes") %>% select(round, Value)
@@ -139,16 +156,42 @@ ggplot(testResultsB %>% mutate(varianceLabel = if_else(is.na(variance), if_else(
 
 ```
 
-The numbers in the diagonal are the variances and it is clear that they are monotonically decreasing over all rounds. Further the p-values of the levene tests indicate that changes in the last three rounds significantly differ from the changes between the first two rounds - with Bonferroni correction for multiple comparison only `R1-R2` to `R4-R5` remains (F = 8.275, p = 0.008). Given the small number of rounds and games per round this result is only a weak support for the second hypothesis.
+The numbers in the diagonal are the variances and it is clear that they are monotonically decreasing over all rounds. Further the p-values of the levene tests indicate that changes in the last three rounds significantly differ from the changes between the first two rounds - with Bonferroni correction for multiple comparison only `R1-R2` to `R4-R5` remains significant (F = 8.275, p = 0.008). Given the small number of rounds and games per round this result is only a weak support for the second hypothesis.
 
 ## Stability of rankings
 
-If we accept that the above two hypotheses hold and that enough rounds are played we would see stable rankings of all participating teams. Kendalls's tau is a prime indicator of similarity between rank lists, so lets look at a tau-map of the rankings of this single tournament.
+If we accept that the above two hypotheses hold and that enough rounds are played we would see stable rankings of all participating teams. Kendall's tau is a prime indicator of similarity between rank lists, so lets look at a tau-map of the rankings of this single tournament.
 
 ```{r ranking stability}
+rankTaus <- cor(HanseaticJuggerCup2013Summary$rankings %>% select(round, entryId, rank) %>%
+                  spread(round, rank) %>% select(-entryId), method = "kendall")
+
+# ggplot(rankTaus %>% as.data.frame() %>% rownames_to_column("round1") %>% gather("round2", "tau", -round1),
+#       aes(x = round1, y = round2, fill = tau)) +
+#   geom_raster() +
+#   scale_x_discrete("round", labels = paste('R', 1:6, sep = '')) +
+#   scale_y_discrete("round", labels = paste('R', 1:6, sep = '')) +
+#   scale_fill_continuous(name = "tau", na.value = "white") +
+#   ggtitle("1. Hanseastic Jugger Cup, 2013", "Kendall's tau between each round") +
+#   theme_minimal() + theme(panel.grid.major.y = element_blank(), panel.grid.major.x = element_blank(),
+#                           plot.title = element_text(hjust = 0.3),
+#                           plot.subtitle = element_text(hjust = 0.3))
+
+ggplot(data_frame(tau = rankTaus[row(rankTaus) - col(rankTaus) == 1], round = 1:5),
+      aes(x = round, y = tau, color = tau)) +
+  geom_step() +
+  scale_x_continuous("round transition", labels = paste('R', 1:5, '-R', 2:6, sep = '')) +
+  scale_y_continuous("tau") +
+  scale_fill_continuous(name = "tau", na.value = "white") +
+  ggtitle("1. Hanseastic Jugger Cup, 2013", "Kendall's tau between consecutive rounds") +
+  theme_minimal() + theme(panel.grid.major.y = element_blank(), panel.grid.major.x = element_blank(),
+                          plot.title = element_text(hjust = 0.3),
+                          plot.subtitle = element_text(hjust = 0.3))
+  
 
 ```
 
+The tau between the rounds increases and seems to level after round 5 - just what one expects from a converging process. But to determine the conditions of this convergence will be part of another analysis.
 
 ## Preparing the data for `juggerdata`
 
