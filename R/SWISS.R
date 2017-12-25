@@ -295,6 +295,7 @@ summary.SwissTournament <- function(object, ...) {
     }
   }
 
+  rounds <- rounds[order(rounds$entryId), ]
   rounds <- rounds[order(rounds$round), ]
 
   for (tIdx in object$teams$entryId) {
